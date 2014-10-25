@@ -1,0 +1,73 @@
+// Apply the java plugin to add support for Java
+apply plugin: 'java'
+// Add application plugin for installApp and run tasks
+apply plugin: 'application'
+
+
+repositories {
+    jcenter()
+}
+
+// http://www.gradle.org/docs/current/dsl/org.gradle.api.tasks.SourceSet.html
+sourceSets {
+    selenium
+    seleniumXvfb
+}
+
+
+dependencies {
+    // The production code uses the SLF4J logging API at compile time
+    compile 'org.slf4j:slf4j-api:1.7.5'
+
+    testCompile 'junit:junit:4.11'
+
+    // ICNDBClient dependency
+    //compile 'net.joningi:icndb-java-api:1.0'
+
+    // Spark dependency
+    compile 'com.sparkjava:spark-core:1.1.1'
+
+    // Selenium dependencies
+    seleniumCompile 'junit:junit:4.11'
+    seleniumCompile 'org.seleniumhq.selenium:selenium-java:2.39.0'
+
+    // Selenium in headless mode
+    seleniumXvfbCompile 'junit:junit:4.11'
+    seleniumXvfbCompile 'org.seleniumhq.selenium:selenium-java:2.39.0'
+}
+
+// Add instructions for application plugin
+mainClassName = "is.placeholder.tictactoe.Main"
+
+task selenium(type: Test, dependsOn: installApp) {
+    testClassesDir = sourceSets.selenium.output.classesDir
+    classpath = sourceSets.selenium.runtimeClasspath
+
+    doFirst {
+        // Start Spark web app in background
+        'build/install/sparkit/bin/sparkit &'.execute() //modify this with appropriate crap
+    }
+}
+
+task seleniumXvfb(type: Test, dependsOn: installApp) {
+    testClassesDir = sourceSets.selenium.output.classesDir
+    classpath = sourceSets.selenium.runtimeClasspath
+
+    doFirst {
+        exec {
+            // Start X virtual frame buffer
+            // Needed to run Firefox on gui-less server
+            commandLine 'bin/xvfb'
+            args 'start'
+        }
+        // Start Spark web app in background
+        'build/install/sparkIt/bin/sparkIt &'.execute()
+    }
+    
+    doLast {
+        exec {
+            commandLine 'bin/xvfb'
+            args 'stop'
+        }
+    }
+}
