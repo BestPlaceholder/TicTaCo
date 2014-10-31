@@ -11,3 +11,4 @@ deploy:
   provider: heroku
   api_key: "1781a65b-f739-4132-8c13-e44dbb59dd5a"
   app: tictaco
+  strategy: git
