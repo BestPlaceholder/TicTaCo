@@ -21,10 +21,6 @@ dependencies {
 
     testCompile 'junit:junit:4.11'
 
-    // ICNDBClient dependency
-    //compile 'net.joningi:icndb-java-api:1.0'
-
-    // Spark dependency
     compile 'com.sparkjava:spark-core:1.1.1'
 
     // Selenium dependencies
@@ -36,8 +32,8 @@ dependencies {
     seleniumXvfbCompile 'org.seleniumhq.selenium:selenium-java:2.39.0'
 }
 
-// Add instructions for application plugin
-mainClassName = "is.placeholder.tictactoe.Main"
+
+mainClassName = "is.placeholder.tictactoe.HelloWeb"
 
 task selenium(type: Test, dependsOn: installApp) {
     testClassesDir = sourceSets.selenium.output.classesDir
@@ -45,7 +41,7 @@ task selenium(type: Test, dependsOn: installApp) {
 
     doFirst {
         // Start Spark web app in background
-        'build/install/sparkit/bin/sparkit &'.execute() //modify this with appropriate crap
+        'build/install/TicTaCo/bin/TicTaCo &'.execute()
     }
 }
 
@@ -53,21 +49,19 @@ task seleniumXvfb(type: Test, dependsOn: installApp) {
     testClassesDir = sourceSets.selenium.output.classesDir
     classpath = sourceSets.selenium.runtimeClasspath
 
+    environment "DISPLAY", ":99"
+
     doFirst {
-        exec {
-            // Start X virtual frame buffer
-            // Needed to run Firefox on gui-less server
-            commandLine 'bin/xvfb'
-            args 'start'
-        }
+        'bin/xvfb start'.execute()
         // Start Spark web app in background
-        'build/install/sparkIt/bin/sparkIt &'.execute()
+        'build/install/TicTaCo/bin/TicTaCo &'.execute()
     }
     
     doLast {
-        exec {
-            commandLine 'bin/xvfb'
-            args 'stop'
-        }
+    	'bin/xvfb stop'.execute()
     }
+}
+
+task stage {
+     dependsOn installApp
 }

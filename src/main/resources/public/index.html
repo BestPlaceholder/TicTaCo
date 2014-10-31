@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Testing spark</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- load bootstrap for nicer ui -->
+        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+        <!--<link rel="icon" type="image/png" href="favicon.png">-->
+    </head>
+    <body>
+        <div class="container">
+            <h1>Making sure we can get everything running smoothly!</h1>
+            <form method="post" action="/gethi" class="form-inline" role="form">
+                <button type="submit">Greetings</button>
+            </form>
+            <hr>
+            <div id="results" class="alert alert-info"></div>
+            <hr>
+        </div>
+
+        <!-- Load jquery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+        <!-- Use ajax to submit form, retrive joke and display on page -->
+        <script>
+        $(document).ready(function() {
+            var form = $('form');
+            form.submit(function( event ) {
+                $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: null
+                }).done(function(hello) {
+                    $('#results').html(hello).attr('class', 'alert alert-success');
+                }).fail(function() {
+                    $('#results').html('Error, no greeting found...').attr('class', 'alert alert-danger');
+                });
+                event.preventDefault();
+            });
+        });
+        </script>
+    </body>
+</html>
