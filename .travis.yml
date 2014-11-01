@@ -5,10 +5,13 @@ jdk:
 
 script:
   - ./gradlew check
+  - chmod +x /bin/travis_staging
+  - ./bin/travis_staging
   - ./gradlew seleniumXvfb
 
 deploy:
-  provider: heroku
-  api_key: "1781a65b-f739-4132-8c13-e44dbb59dd5a"
-  app: tictaco
-  strategy: git
+  - provider: heroku
+    api_key: "1781a65b-f739-4132-8c13-e44dbb59dd5a"
+    strategy: git
+    app:
+      master: tictaco

@@ -3,6 +3,8 @@ apply plugin: 'java'
 // Add application plugin for installApp and run tasks
 apply plugin: 'application'
 
+apply plugin: 'jacoco'
+
 
 repositories {
     jcenter()
@@ -59,6 +61,14 @@ task seleniumXvfb(type: Test, dependsOn: installApp) {
     
     doLast {
     	'bin/xvfb stop'.execute()
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination "${buildDir}/resources/main/public/cc"
     }
 }
 
