@@ -1,43 +1,148 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Testing spark</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- load bootstrap for nicer ui -->
-        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-        <!--<link rel="icon" type="image/png" href="favicon.png">-->
-    </head>
-    <body>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>TicTaCo</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/landing-page.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
-            <h1>Making sure we can get everything running smoothly!</h1>
-            <form method="post" action="/gethi" class="form-inline" role="form">
-                <button type="submit">Greetings</button>
-            </form>
-            <hr>
-            <div id="results" class="alert alert-info"></div>
-            <hr>
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">TicTaCo</a>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Header -->
+    <div class="intro-header">
+
+        <div class="container">
+
+        <div class="row">
+            <div class="col-12"><h1 />
+                <h1>Making sure we can get everything running smoothly!</h1>
+                <form method="get" action="/gethi" class="form-inline" role="form">
+                    <button type="submit">Greetings</button>
+                </form>
+                <hr>
+                <div id="results" class="alert alert-info"></div>
+                <hr>
+            </div>
         </div>
 
-        <!-- Load jquery -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <div class="row">
+                <div class="col-12"><h1 />
+                </div>
+            </div>
 
-        <!-- Use ajax to submit form, retrive joke and display on page -->
-        <script>
-        $(document).ready(function() {
-            var form = $('form');
-            form.submit(function( event ) {
-                $.ajax({
-                    type: form.attr('method'),
-                    url: form.attr('action'),
-                    data: null
-                }).done(function(hello) {
-                    $('#results').html(hello).attr('class', 'alert alert-success');
-                }).fail(function() {
-                    $('#results').html('Error, no greeting found...').attr('class', 'alert alert-danger');
-                });
-                event.preventDefault();
+            <div class="row">
+                <div class="col-xs-2"></div>
+                <div class="col-xs-8">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <input type="image" src="img/x.jpg" class="img-responsive center-block"/><h1 />
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="image" src="img/o.jpg" class="img-responsive center-block"/><h1 />
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="image" src="img/x.jpg" class="img-responsive center-block"/><h1 />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <input type="image" src="img/x.jpg" class="img-responsive center-block"/><h1 />
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="image" src="img/empty.jpg" class="img-responsive center-block"/><h1 />
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="image" src="img/x.jpg" class="img-responsive center-block"/><h1 />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <input type="image" src="img/x.jpg" class="img-responsive center-block"/><h1 />
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="image" src="img/x.jpg" class="img-responsive center-block"/><h1 />
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="image" src="img/o.jpg" class="img-responsive center-block"/><h1 />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.intro-header -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Use ajax to submit form, retrive joke and display on page -->
+    <script>
+    $(document).ready(function() {
+        var form = $('form');
+        form.submit(function( event ) {
+            $.ajax({
+                type: form.attr('method'),
+                url: form.attr('action'),
+                data: null
+            }).done(function(hello) {
+                $('#results').html(hello).attr('class', 'alert alert-success');
+            }).fail(function() {
+                $('#results').html('Error, no greeting found...').attr('class', 'alert alert-danger');
             });
+            event.preventDefault();
         });
-        </script>
-    </body>
+    });
+    </script>
+
+</body>
+
 </html>
