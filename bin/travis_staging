@@ -1,6 +1,5 @@
 #!/bin/bash
 
-npm install heroku
 # Add your Heroku git repo:
 git remote add heroku git@heroku.com:tictaco-staging.git
 # Add your Heroku API key:
