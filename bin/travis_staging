@@ -15,5 +15,5 @@ heroku keys:clear
 # Add a new SSH key to Heroku
 yes | heroku keys:add
 # Push to Heroku!
-yes | git push heroku staging
+yes | git push heroku
 sleep 20s
