@@ -5,7 +5,7 @@ jdk:
 
 script:
   - ./gradlew check
-  - chmod +x /bin/travis_staging
+  - sudo chmod +x /bin/travis_staging
   - ./bin/travis_staging
   - ./gradlew seleniumXvfb
 
