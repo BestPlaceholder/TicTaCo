@@ -17,12 +17,22 @@ public class TicTaCoWeb implements SparkApplication {
 
     public void init(){
         
-        get(new Route("/gethi"){
+        get(new Route("/helloweb"){
             @Override
             public Object handle(Request request, Response response){
-                String hello = "Hello world";
+                String hello = "Hello World!";
                 return hello;
             }
-	    });
+        });
+        
+        post(new Route("/playtic"){
+            @Override
+            public Object handle(Request request, Response response){
+                //String hello = "You pressed: ";
+                String tile = request.queryParams("tile");
+                //return hello + title;
+                return tile.substring(4) + " empty ";
+            }
+        });
     }
 }
