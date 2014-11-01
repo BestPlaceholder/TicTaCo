@@ -3,8 +3,6 @@ language: java
 jdk:
   - openjdk7
 
-before_script:
-  - wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
 script:
   - ./gradlew check
