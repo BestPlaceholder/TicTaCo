@@ -8,7 +8,7 @@ before_script:
 
 script:
   - ./gradlew check
-  - ./bin/travis_staging
+  - ./gradlew herokuAppDeploy
   - ./gradlew seleniumXvfb
 
 deploy:

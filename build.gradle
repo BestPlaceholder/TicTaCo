@@ -4,11 +4,23 @@ apply plugin: 'java'
 apply plugin: 'application'
 
 apply plugin: 'jacoco'
+apply plugin: 'heroku'
 
 
 repositories {
     jcenter()
 }
+
+buildscript {
+    repositories {
+    mavenCentral()
+    maven { url 'http://dl.bintray.com/vermeulen-mp/gradle-plugins' }
+    }
+    dependencies {
+    classpath 'com.wiredforcode:gradle-heroku-plugin:1.0.0'    
+    }
+}
+
 
 // http://www.gradle.org/docs/current/dsl/org.gradle.api.tasks.SourceSet.html
 sourceSets {
@@ -18,6 +30,7 @@ sourceSets {
 
 
 dependencies {
+    
     // The production code uses the SLF4J logging API at compile time
     compile 'org.slf4j:slf4j-api:1.7.5'
 
@@ -74,4 +87,9 @@ jacocoTestReport {
 
 task stage {
      dependsOn installApp
+}
+
+heroku {
+    apiKey = '1781a65b-f739-4132-8c13-e44dbb59dd5a'
+    appName = 'tictaco-staging'
 }
