@@ -48,19 +48,6 @@
     <div class="intro-header">
 
         <div class="container">
-
-        <div class="row">
-            <div class="col-12"><h1 />
-                <h1>Making sure we can get everything running smoothly!</h1>
-                <form method="get" action="/helloweb" class="form-inline" role="hello">
-                    <button type="submit">Greetings</button>
-                </form>
-                <hr>
-                <div id="results" class="alert alert-info"></div>
-                <hr>
-            </div>
-        </div>
-
             <div class="row">
                 <div class="col-12"><h1 />
                 </div>
@@ -159,20 +146,6 @@
                 }).done(function(returnedString) {
                     var responce = returnedString.split(" ");
                     $('#tile' + responce[0]).attr('src', 'img/' + responce[1] + '.jpg');
-                    $('#results').html(returnedString);
-                }).fail(function() {
-                    $('#results').html('Error, no Tic Tac found...').attr('class', 'alert alert-danger');
-                });
-            }
-            else if (form.attr('role') == 'hello') {
-                $.ajax({
-                    type: form.attr('method'),
-                    url: form.attr('action'),
-                    data: form.serialize()
-                }).done(function(returnedString) {
-                    $('#results').html(returnedString).attr('class', 'alert alert-success');
-                }).fail(function() {
-                    $('#results').html('Error, no generate found...').attr('class', 'alert alert-danger');
                 });
             }
             event.preventDefault();

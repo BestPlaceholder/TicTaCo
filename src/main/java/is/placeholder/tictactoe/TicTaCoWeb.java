@@ -17,14 +17,6 @@ public class TicTaCoWeb implements SparkApplication {
 
     public void init(){
         
-        get(new Route("/helloweb"){
-            @Override
-            public Object handle(Request request, Response response){
-                String hello = "Hello World!";
-                return hello;
-            }
-        });
-        
         post(new Route("/playtic"){
             @Override
             public Object handle(Request request, Response response){
