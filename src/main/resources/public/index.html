@@ -50,12 +50,57 @@
     <div class="intro-header">
 
         <div class="container">
+            <!-- Spacing -->
             <div class="row">
                 <div class="col-12"><h1 />
                 </div>
             </div>
 
-            <div class="row">
+            <!-- Human or computer -->
+            <div class="row" id="sectionhumanorcomputer">
+                <div class="col-12"><h1 />
+                    <ul class="list-inline">
+                        <h2 style="color:black">Select opponent</h2>
+                        <hr class="intro-divider">
+                        <li>
+                            <form method="post" action="/selectopponent" class="form-inline" role="humanorcomputer">
+                                <input type="submit" class="btn btn-default btn-lg" value="Human">
+                                <input type="hidden" name="option" value="human">
+                            </form>
+                        </li>
+                        <li>
+                            <form method="post" action="/selectopponent" class="form-inline" role="humanorcomputer">
+                                <input type="submit" class="btn btn-default btn-lg" value="Computer">
+                                <input type="hidden" name="option" value="computer">
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Difficulty -->
+            <div class="row hidden-xs hidden-sm hidden-md hidden-lg" id="sectiondifficulty">
+                <div class="col-12"><h1 />
+                    <ul class="list-inline">
+                        <h2 style="color:black">Select difficulty</h2>
+                        <hr class="intro-divider">
+                        <li>
+                            <form method="post" action="/selectdifficulty" class="form-inline" role="difficulty">
+                                <input type="submit" class="btn btn-default btn-lg" value="Easy">
+                                <input type="hidden" name="option" value="easy">
+                            </form>
+                        </li>
+                        <li>
+                            <form method="post" action="/selectdifficulty" class="form-inline" role="difficulty">
+                                <input type="submit" class="btn btn-default btn-lg" value="Hard">
+                                <input type="hidden" name="option" value="hard">
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row hidden-xs hidden-sm hidden-md hidden-lg" id="sectiongame">
                 <div class="col-xs-2"></div>
                 <div class="col-xs-8">
                     <div class="row">
@@ -148,6 +193,26 @@
                 }).done(function(returnedString) {
                     var responce = returnedString.split(" ");
                     $('#tile' + responce[0]).attr('src', 'img/' + responce[1] + '.jpg');
+                });
+            }
+            else if (form.attr('role') == 'humanorcomputer') {
+                $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: form.serialize()
+                }).done(function(returnedString) {
+                    $('#sectionhumanorcomputer').attr('class', 'row hidden-xs hidden-sm hidden-md hidden-lg');
+                    $('#sectiondifficulty').attr('class', 'row');
+                });
+            }
+            else if (form.attr('role') == 'difficulty') {
+                $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: form.serialize()
+                }).done(function(returnedString) {
+                    $('#sectiondifficulty').attr('class', 'row hidden-xs hidden-sm hidden-md hidden-lg');
+                    $('#sectiongame').attr('class', 'row');
                 });
             }
             event.preventDefault();

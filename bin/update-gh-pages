@@ -18,10 +18,12 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   echo -e "Messing with jacoco specific things"
   cd jacoco
   #deal with hidden files so jacoco css will be actually visible thanks
+  rm sessions.html
+  rm -r resources
   mv .resources resources
   mv .sessions.html sessions.html
-  sed -i s/.resources/resources/g index.html;
-  sed -i s/.sessions.html/sessions.html/g index.html;
+  find . -type f -exec sed -i "s/\\.resources/resources/g" {} \;
+  find . -type f -exec sed -i "s/\\.sessions/sessions/g" {} \;
   cd ..
   
   echo -e "Committing"
