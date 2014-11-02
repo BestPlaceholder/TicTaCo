@@ -1,16 +1,19 @@
 package is.placeholder.tictactoe.MainWebTest;
 
-        import org.junit.AfterClass;
-        import org.junit.Before;
-        import org.junit.BeforeClass;
-        import org.junit.Test;
 
-        import org.openqa.selenium.By;
-        import org.openqa.selenium.firefox.FirefoxDriver;
-        import org.openqa.selenium.support.ui.*;
-        import org.openqa.selenium.WebDriver;
+import static org.junit.Assert.assertEquals;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-        import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.*;
+import org.openqa.selenium.WebDriver;
+
+import java.util.concurrent.TimeUnit;
 
 public class TicTaCoWebTest {
 
@@ -26,8 +29,14 @@ public class TicTaCoWebTest {
         if(port == null) {
             port = "4567";
         }
-        baseUrl = "http://"+System.getenv("HEROKU_STAGING_APP")+".herokuapp.com";
+        baseUrl = "http://tictaco-staging.herokuapp.com";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    }
+
+    @Test
+    public void assertTitle() {
+        driver.get(baseUrl + "/");
+        assertEquals("TicTaCo", driver.getTitle());
     }
 
     @AfterClass
