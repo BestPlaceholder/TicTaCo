@@ -26,6 +26,10 @@ public class MainTest {
     	assertEquals(true, function.Computer);
     	assertEquals(false, function.Difficulty);
     }
-    
+    @Test
+    public void TestmakeGrid() {
+    	char [][] test = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
+    	assertArrayEquals( test, tictactoe.makeGrid());
+    }
 }
 
