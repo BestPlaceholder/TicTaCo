@@ -65,6 +65,14 @@ public class MainTest {
     	assertEquals( true, function.getWhoToPlay());
 
     }
+    @Test
+    public void testComputerMoveBadAI() {
+        TicTacToe function = new TicTacToe (true, false);
+        function.humanPlayerMove(0,1);
+        int [] testData = {1,1};
+        assertArrayEquals(testData, function.computerMove(function.getGrid()));
+
+    }
 
     @Test
     public void testIfPlayerHasWon(){
