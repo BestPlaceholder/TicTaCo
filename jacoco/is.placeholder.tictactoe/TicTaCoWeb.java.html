@@ -15,31 +15,71 @@ import spark.servlet.SparkApplication;
 <span class="nc" id="L15">        tictacoweb.init(); </span>
 <span class="nc" id="L16">    }</span>
 
+    private TicTacToe ticTacToe;
+
     public void init(){
         
-<span class="nc" id="L20">        post(new Route(&quot;/playtic&quot;){</span>
+<span class="nc" id="L22">        post(new Route(&quot;/playtic&quot;){</span>
             @Override
             public Object handle(Request request, Response response){
-                //String hello = &quot;You pressed: &quot;;
-<span class="nc" id="L24">                String tile = request.queryParams(&quot;tile&quot;);</span>
-                //return hello + title;
-<span class="nc" id="L26">                return tile.substring(4) + &quot; empty&quot;;</span>
+                // Get the coordinates of the tile that was clicked
+<span class="nc" id="L26">                String tile = request.queryParams(&quot;tile&quot;);</span>
+<span class="nc" id="L27">                int tileX = Integer.parseInt(tile.substring(4, 5));</span>
+<span class="nc" id="L28">                int tileY = Integer.parseInt(tile.substring(5, 6));</span>
+
+                // Account for diffrence between tiles and arrays
+<span class="nc" id="L31">                tileX--;tileY--;</span>
+
+                // Make the player move, if invalid, return
+                String playerMove;
+<span class="nc bnc" id="L35" title="All 2 branches missed.">                if (ticTacToe.humanPlayerMove(tileX, tileY) != null)</span>
+<span class="nc" id="L36">                    playerMove = Integer.toString(++tileX) + Integer.toString(++tileY) + &quot; x&quot;;</span>
+                else
+<span class="nc" id="L38">                    return &quot; &quot;;</span>
+                
+                // Make the computer move
+<span class="nc" id="L41">                String computerMove = null;</span>
+<span class="nc" id="L42">                int[] computerMoveCoordinates = ticTacToe.computerMove(ticTacToe.grid);</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">                if (computerMoveCoordinates != null)</span>
+<span class="nc" id="L44">                    computerMove = Integer.toString(++computerMoveCoordinates[0]) + </span>
+                        Integer.toString(++computerMoveCoordinates[1]) + &quot; o&quot;;
+                else
+<span class="nc" id="L47">                    computerMove = playerMove; // Say the same move if computer does nothing</span>
+
+                // Check for win
+<span class="nc" id="L50">                String scores = null;</span>
+<span class="nc" id="L51">                int gameEnd = ticTacToe.hasWon();</span>
+                // If there is a win, send the update score to the web
+<span class="nc bnc" id="L53" title="All 2 branches missed.">                if (gameEnd != 0) {</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">                    if (gameEnd == 1)</span>
+<span class="nc" id="L55">                        scores = &quot; &quot; + Integer.toString(ticTacToe.getPlayerScore());</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">                    else if (gameEnd == 2)</span>
+<span class="nc" id="L57">                        scores = &quot; 0 &quot; + Integer.toString(ticTacToe.getComputerScore());</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">                    else if (gameEnd == 3)</span>
+<span class="nc" id="L59">                        scores = &quot; 0 0 &quot; + Integer.toString(ticTacToe.getTieScore());</span>
+                }
+
+<span class="nc" id="L62">                return playerMove + &quot; &quot; + computerMove + scores;</span>
             }
         });
         
-<span class="nc" id="L30">        post(new Route(&quot;/selectopponent&quot;){</span>
+<span class="nc" id="L66">        post(new Route(&quot;/selectdifficulty&quot;){</span>
             @Override
             public Object handle(Request request, Response response){
-<span class="nc" id="L33">                return &quot;13 empty&quot;;</span>
+<span class="nc" id="L69">                String difficulty = request.queryParams(&quot;option&quot;);</span>
+
+                // Create a new game with the desired difficulty
+<span class="nc bnc" id="L72" title="All 2 branches missed.">                if (difficulty == &quot;easy&quot;)</span>
+<span class="nc" id="L73">                    ticTacToe = new TicTacToe(true, false);</span>
+                else
+<span class="nc" id="L75">                    ticTacToe = new TicTacToe(true, false);</span>
+
+                // Create the grid
+<span class="nc" id="L78">                ticTacToe.makeGrid();</span>
+
+<span class="nc" id="L80">                return &quot; &quot;;</span>
             }
         });
-        
-<span class="nc" id="L37">        post(new Route(&quot;/selectdifficulty&quot;){</span>
-            @Override
-            public Object handle(Request request, Response response){
-<span class="nc" id="L40">                return &quot;13 empty&quot;;</span>
-            }
-        });
-<span class="nc" id="L43">    }</span>
+<span class="nc" id="L83">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

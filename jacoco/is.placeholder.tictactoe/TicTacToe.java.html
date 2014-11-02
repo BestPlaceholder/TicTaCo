@@ -61,17 +61,18 @@ public class TicTacToe {
 			}
 		}
 <span class="fc" id="L63">		inputGrid = AI.getMove(inputGrid);</span>
-<span class="fc" id="L64">		int [] returnValue = new int [2];</span>
-<span class="pc bpc" id="L65" title="1 of 2 branches missed.">		for(int i = 0;i&lt;3;i++){</span>
-<span class="fc bfc" id="L66" title="All 2 branches covered.">			for(int j = 0;j&lt;3;j++){</span>
-<span class="fc bfc" id="L67" title="All 2 branches covered.">				if (previousGrid[i][j] != grid[i][j]){</span>
-<span class="fc" id="L68">					returnValue[0] = i;</span>
-<span class="fc" id="L69">					returnValue[1] = j;</span>
-<span class="fc" id="L70">					return returnValue;</span>
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">		if (inputGrid == null) return null;</span>
+<span class="fc" id="L65">		int [] returnValue = new int [2];</span>
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">		for(int i = 0;i&lt;3;i++){</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">			for(int j = 0;j&lt;3;j++){</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">				if (previousGrid[i][j] != grid[i][j]){</span>
+<span class="fc" id="L69">					returnValue[0] = i;</span>
+<span class="fc" id="L70">					returnValue[1] = j;</span>
+<span class="fc" id="L71">					return returnValue;</span>
 				}
 			}
 		}
-<span class="nc" id="L74">		return returnValue;</span>
+<span class="nc" id="L75">		return returnValue;</span>
 	}
 
 	//A test that searches through the grid and
@@ -80,7 +81,20 @@ public class TicTacToe {
 	// 2 = player has won, 3 = computer has won
 	public int hasWon(){
 		
-<span class="fc" id="L83">		return 2;</span>
+<span class="fc" id="L84">		return 2;</span>
+	}
+
+
+	public int getPlayerScore() {
+<span class="nc" id="L89">		return 1;</span>
+	}
+
+	public int getComputerScore() {
+<span class="nc" id="L93">		return 2;</span>
+	}
+
+	public int getTieScore() {
+<span class="nc" id="L97">		return 3;</span>
 	}
 
 }
