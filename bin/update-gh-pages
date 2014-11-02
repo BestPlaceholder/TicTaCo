@@ -15,14 +15,16 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   #go into diractory and copy data we're interested in to that directory
   cd gh-pages
   cp -Rf $HOME/reports/* .
+  echo -e "Messing with jacoco specific things"
   cd jacoco
   #deal with hidden files so jacoco css will be actually visible thanks
   mv .resources resources
   mv .sessions.html sessions.html
-  find . -name "*.html" -exec sed -i "s/.resources/resources/g" '{}' \;
-  find . -name "*.html" -exec sed -i "s/.sessions.html/sessions.html/g" '{}' \;
+  sed -i s/.resources/resources/g index.html;
+  sed -i s/.sessions.html/sessions.html/g index.html;
   cd ..
-
+  
+  echo -e "Committing"
   #add, commit and push files
   git add -f .
   git commit -m "Travis build $TRAVIS_BUILD_NUMBER pushed to gh-pages"
