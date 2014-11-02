@@ -6,6 +6,8 @@ jdk:
 
 script:
   - ./gradlew check
+  - ./gradlew herokuAppDestroy
+  - ./gradlew herokuAppCreate
   - ./gradlew herokuAppDeploy
   - ./gradlew seleniumXvfb
 
