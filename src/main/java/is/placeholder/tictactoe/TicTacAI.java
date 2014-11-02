@@ -21,12 +21,15 @@ public class TicTacAI {
 	if(turn == 1 && identity[me] == 'X'){
 	    playboard[0][0] = 'X';
 	    return playboard;
-	} else if (turn == 1 && identity[me] == 'O'){
-	    if (playboard[1][1] != 'X'){
+	}else if (turn == 1 && identity[me] == 'O'){
+	    if (playboard[1][1] == 'X'){
 		playboard[0][0] = 'O';
+		return playboard;
+	    }else {
+		playboard[1][1] = 'O';
 		return playboard;
 	    }
 	}
-	return null;
+	return playboard;
     }
 }
