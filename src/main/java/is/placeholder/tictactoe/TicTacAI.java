@@ -36,6 +36,7 @@ public class TicTacAI {
      *  if its not it just plays completely random moves
      */
     public char[][] getMove(char playBoard[][]){
+        if (!hasMoves(playBoard)) return null;
 	turn++;
 	//Gets skipped if the difficulty is off
 	if(diff){
@@ -172,5 +173,14 @@ public class TicTacAI {
                 return playBoard;
             }
         }
+    }
+
+    private boolean hasMoves(char [][] inputGrid) {
+        for (int i = 0; i < 3; i++){
+            for (int j = 0 ; j < 3 ; j++){
+                if (inputGrid[i][j] == ' ') return true;
+            }
+        }
+        return false;
     }
 }

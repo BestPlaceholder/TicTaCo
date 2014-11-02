@@ -181,15 +181,15 @@
                         $('#tile' + responce[2]).attr('src', 'img/' + responce[3] + '.jpg');
                     }
                     // Check if the responce contains a changed tie score
-                    if (responce.length > 6) {
+                    if (responce.length > 8) {
                         $('#ties').html('Ties: ' + responce[6]).attr('class', 'alert alert-success');
                     }
                     // Check if the responce contains a changed computer score
-                    else if (responce.length > 5) {
+                    else if (responce.length > 7) {
                         $('#computerscore').html('Computer: ' + responce[5]).attr('class', 'alert alert-danger');
                     }
                     // Check if the responce contains a changed player score
-                    else if (responce.length > 4) {
+                    else if (responce.length > 6) {
                         $('#playerscore').html('Player: ' + responce[4]).attr('class', 'alert alert-warning');
                     }
                     else {

@@ -61,6 +61,7 @@ public class TicTacToe {
 			}
 		}
 		inputGrid = AI.getMove(inputGrid);
+		if (inputGrid == null) return null;
 		int [] returnValue = new int [2];
 		for(int i = 0;i<3;i++){
 			for(int j = 0;j<3;j++){
@@ -81,6 +82,19 @@ public class TicTacToe {
 	public int hasWon(){
 		
 		return 2;
+	}
+
+
+	public int getPlayerScore() {
+		return 1;
+	}
+
+	public int getComputerScore() {
+		return 2;
+	}
+
+	public int getTieScore() {
+		return 3;
 	}
 
 }
