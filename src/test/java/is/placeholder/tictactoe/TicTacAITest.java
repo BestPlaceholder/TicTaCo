@@ -3,6 +3,8 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 public class TicTacAITest {
+   
+    //Makes sure the first move as X is correct
     @Test
     public void firstMoveX() {
         TicTacAI AI = new TicTacAI('X', true);
@@ -18,7 +20,7 @@ public class TicTacAITest {
 	}
 	    
     }
-
+    //Makes sure the first move as O is correct
     @Test
     public void firstMoveO() {
 	char[][] playBoard = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
@@ -54,6 +56,8 @@ public class TicTacAITest {
 	    }
 	}
     }
+
+    //Make sure randomMove fills a grid perfectly in 9 moves every time.
     @Test
     public void randomMove(){
 	char[][] playBoard = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
@@ -70,6 +74,7 @@ public class TicTacAITest {
 	    }
 	}
     }
+    //Makes sure that it searches for win connditions in horizontal lines correctly
    @Test
    public void straightRowHorCheck(){
        char[][] turnTicker = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
@@ -91,7 +96,14 @@ public class TicTacAITest {
        char[][] playBoard4 = {{'X',' ','X'},{' ',' ',' '},{' ',' ',' '}};
        playBoard4 = AI.getMove(playBoard4);
        assertEquals("To not lose the AI should play in 0 1", 'O', playBoard4[0][1]);
+
+       char[][] playBoard5 = {{'O',' ','O'},{' ',' ',' '},{' ',' ',' '}};
+       playBoard5 = AI.getMove(playBoard5);
+       assertEquals("To win the AI should play in 0 1", 'O', playBoard5[0][1]);
+
    }
+
+    //Makes sure that it searches for win connditions in vertical lines correctly
     @Test
     public void straightRowVerCheck(){
         char[][] turnTicker = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
@@ -114,6 +126,8 @@ public class TicTacAITest {
         playBoard4 = AI.getMove(playBoard3);
         assertEquals("The AI should not overwrite X in 0 0", 'X', playBoard4[0][0]);
     }
+
+    //Makes sure that it searches for win connditions in upwards leaning diagonal lines correctly
     @Test
     public void diagonalRowUpCheck(){
 	char[][] turnTicker = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
@@ -136,6 +150,7 @@ public class TicTacAITest {
         playBoard4 = AI.getMove(playBoard4);
         assertEquals("The AI should not overwrite X in 0 0", 'X', playBoard4[0][0]);
     }
+    //Makes sure that it searches for win connditions in downwards leaning diagonal lines correctly
     @Test
     public void diagonalRowDownCheck(){
         char[][] turnTicker = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
