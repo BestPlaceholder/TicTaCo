@@ -25,6 +25,7 @@ public class tictactoe {
 	}
 
 	public static char[][] humanPlayerMove (int x, int y, char [][] grid){
+		grid[0][0] = 'X';
 		return grid;
 	}
 
