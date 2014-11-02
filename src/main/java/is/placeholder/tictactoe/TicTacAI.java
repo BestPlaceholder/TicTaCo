@@ -9,7 +9,7 @@ import java.util.Random;
  *  of a two dimensional char array and adds a move to it based on its
  *  state and the selected difficulty.
  *  To see its implementation go to
- *  <a href="http://ourprettyherokuserver.com">Heroku - Tic Tac Toe.</a>
+ *  <a href="tictaco.herokuapp.com">Heroku - Tic Tac Toe.</a>
  *
  *  @author Andri Mar Sigurdsson
  *************************************************************************/
