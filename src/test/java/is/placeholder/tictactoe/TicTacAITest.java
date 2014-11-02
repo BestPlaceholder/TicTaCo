@@ -21,10 +21,10 @@ public class TicTacAITest {
 
     @Test
     public void firstMoveO() {
-	TicTacAI AI = new TicTacAI('O',true);
 	char[][] playBoard = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
 	for (int i = 0; i < 3 ; i++){
 	    for (int j = 0; j < 3; j++){
+	TicTacAI AI = new TicTacAI('O',true);
 		playBoard[i][j] = 'X';
 		playBoard = AI.getMove(playBoard);
 		if (i == 1 && j == 1){
