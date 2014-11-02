@@ -5,8 +5,10 @@ jdk:
 
 
 script:
-  - git remote -v
   - ./gradlew check
+  - ./gradlew herokuAppDestroy
+  - ./gradlew herokuAppCreate
+  - git remote -v
   - ./gradlew seleniumXvfb
 
 deploy:
