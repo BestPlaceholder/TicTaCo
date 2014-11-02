@@ -5,29 +5,29 @@ import static org.junit.Assert.*;
 
 public class MainTest {
     @Test
-    public void TestInitializer() {
+    public void testInitializer() {
     	TicTacToe function = new TicTacToe(true);
     	assertEquals(true, function.computer);
     }
 	@Test
-    public void TestInitializer2() {
+    public void testInitializer2() {
     	TicTacToe function = new TicTacToe(false);
     	assertEquals(false, function.computer);
     }
     @Test
-    public void TestInitializerWith2Arguments() {
+    public void testInitializerWith2Arguments() {
     	TicTacToe function = new TicTacToe(true, true);
     	assertEquals(true, function.computer);
     	assertEquals(true, function.difficulty);
     }
     @Test
-    public void TestInitializerWith2Arguments2() {
+    public void testInitializerWith2Arguments2() {
     	TicTacToe function = new TicTacToe(true, false);
     	assertEquals(true, function.computer);
     	assertEquals(false, function.difficulty);
     }
     @Test
-    public void TestmakeGrid() {
+    public void testmakeGrid() {
     	char [][] test = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
     	TicTacToe function = new TicTacToe(true);
     	function.makeGrid();
@@ -35,7 +35,7 @@ public class MainTest {
     }
 
     @Test
-    public void TestLeftRightCorner() {
+    public void testLeftRightCorner() {
     	TicTacToe function = new TicTacToe(true);
     	char [][] test = {{'X',' ',' '},{' ',' ',' '},{' ',' ',' '}};
     	function.makeGrid();
@@ -44,7 +44,7 @@ public class MainTest {
     }
 
     @Test
-    public void TestManyHumanMovesInRow() {
+    public void testManyHumanMovesInRow() {
     	TicTacToe function = new TicTacToe(true);
     	char [][] test = {{'X',' ','X'},{'X',' ',' '},{'X',' ','X'}};
     	function.makeGrid();
@@ -56,7 +56,7 @@ public class MainTest {
     }
     
     @Test
-    public void TestSameHumanMoveInRow() {
+    public void testSameHumanMoveInRow() {
     	TicTacToe function = new TicTacToe(true);
     	function.makeGrid();
     	char [][] testData = {{'X',' ',' '},{' ',' ',' '},{' ',' ',' '}};
