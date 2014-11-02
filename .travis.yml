@@ -3,7 +3,8 @@ language: java
 jdk:
   - openjdk7
 
-
+before_script:
+  - echo -e "Host heroku.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 script:
   - ./gradlew check
   - ./gradlew herokuAppDestroy
