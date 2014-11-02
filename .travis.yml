@@ -4,13 +4,18 @@ jdk:
   - openjdk7
 
 before_script:
-  - echo -e "Host heroku.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+  - gem install heroku
+  - echo "Host heroku.com" >> ~/.ssh/config
+  - echo "   StrictHostKeyChecking no" >> ~/.ssh/config
+  - echo "   CheckHostIP no" >> ~/.ssh/config
+  - echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
 script:
   - ./gradlew check
-  - ./gradlew herokuAppDestroy
-  - ./gradlew herokuAppCreate
-  - heroku keys:add
-  - git push heroku master
+  - git remote add heroku git@heroku.com:tictaco-staging.git
+  - export HEROKU_API_KEY=1781a65b-f739-4132-8c13-e44dbb59dd5a
+  - heroku keys:clear
+  - yes | heroku keys:add
+  - yes | git push heroku master
   - sleep 20s
   - ./gradlew seleniumXvfb
 

@@ -4,22 +4,12 @@ apply plugin: 'java'
 apply plugin: 'application'
 
 apply plugin: 'jacoco'
-apply plugin: 'heroku'
 
 
 repositories {
     jcenter()
 }
 
-buildscript {
-    repositories {
-    mavenCentral()
-    maven { url 'http://dl.bintray.com/vermeulen-mp/gradle-plugins' }
-    }
-    dependencies {
-    classpath 'com.wiredforcode:gradle-heroku-plugin:1.0.0'    
-    }
-}
 
 
 // http://www.gradle.org/docs/current/dsl/org.gradle.api.tasks.SourceSet.html
@@ -89,7 +79,3 @@ task stage {
      dependsOn installApp
 }
 
-heroku {
-    apiKey = '1781a65b-f739-4132-8c13-e44dbb59dd5a'
-    appName = 'tictaco-staging'
-}
