@@ -52,7 +52,7 @@ public class TicTacToe {
 	// 2 = player has won, 3 = computer has won
 	public int hasWon(){
 
-		return 0;
+		return 2;
 	}
 
 }
