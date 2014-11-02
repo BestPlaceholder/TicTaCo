@@ -20,10 +20,15 @@ public class TicTaCoWeb implements SparkApplication {
         post(new Route("/playtic"){
             @Override
             public Object handle(Request request, Response response){
-                //String hello = "You pressed: ";
                 String tile = request.queryParams("tile");
-                //return hello + title;
-                return tile.substring(4) + " empty";
+
+                int tileX = Integer.parseInt(tile.substring(4, 5));
+                int tileY = Integer.parseInt(tile.substring(5, 6));
+
+                String playerMove = Integer.toString(tileX) + Integer.toString(tileY) + " x";
+                String computerMove = "33 o";
+
+                return playerMove + " " + computerMove;
             }
         });
         

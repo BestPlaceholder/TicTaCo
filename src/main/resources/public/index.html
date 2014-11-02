@@ -84,19 +84,19 @@
                     <div class="row">
                         <div class="col-xs-4">
                             <form method="post" action="/playtic" class="form-inline" role="tictac">
-                            <input type="image" src="img/x.jpg" class="img-responsive center-block" id="tile11"><h1 />
+                            <input type="image" src="img/empty.jpg" class="img-responsive center-block" id="tile11"><h1 />
                             <input type="hidden" name="tile" value="tile11">
                             </form>
                         </div>
                         <div class="col-xs-4">
                             <form method="post" action="/playtic" class="form-inline" role="tictac" name="test">
-                            <input type="image" src="img/o.jpg" class="img-responsive center-block" id="tile21"><h1 />
+                            <input type="image" src="img/empty.jpg" class="img-responsive center-block" id="tile21"><h1 />
                             <input type="hidden" name="tile" value="tile21">
                             </form>
                         </div>
                         <div class="col-xs-4">
                             <form method="post" action="/playtic" class="form-inline" role="tictac">
-                            <input type="image" src="img/x.jpg" class="img-responsive center-block" id="tile31"><h1 />
+                            <input type="image" src="img/empty.jpg" class="img-responsive center-block" id="tile31"><h1 />
                             <input type="hidden" name="tile" value="tile31">
                             </form>
                         </div>
@@ -105,7 +105,7 @@
                     <div class="row">
                         <div class="col-xs-4">
                             <form method="post" action="/playtic" class="form-inline" role="tictac">
-                            <input type="image" src="img/x.jpg" class="img-responsive center-block" id="tile12"><h1 />
+                            <input type="image" src="img/empty.jpg" class="img-responsive center-block" id="tile12"><h1 />
                             <input type="hidden" name="tile" value="tile12">
                             </form>
                         </div>
@@ -117,7 +117,7 @@
                         </div>
                         <div class="col-xs-4">
                             <form method="post" action="/playtic" class="form-inline" role="tictac">
-                            <input type="image" src="img/x.jpg" class="img-responsive center-block" id="tile32"><h1 />
+                            <input type="image" src="img/empty.jpg" class="img-responsive center-block" id="tile32"><h1 />
                             <input type="hidden" name="tile" value="tile32">
                             </form>
                         </div>
@@ -126,19 +126,19 @@
                     <div class="row">
                         <div class="col-xs-4">
                             <form method="post" action="/playtic" class="form-inline" role="tictac">
-                            <input type="image" src="img/x.jpg" class="img-responsive center-block" id="tile13"><h1 />
+                            <input type="image" src="img/empty.jpg" class="img-responsive center-block" id="tile13"><h1 />
                             <input type="hidden" name="tile" value="tile13">
                             </form>
                         </div>
                         <div class="col-xs-4">
                             <form method="post" action="/playtic" class="form-inline" role="tictac">
-                            <input type="image" src="img/x.jpg" class="img-responsive center-block" id="tile23"><h1 />
+                            <input type="image" src="img/empty.jpg" class="img-responsive center-block" id="tile23"><h1 />
                             <input type="hidden" name="tile" value="tile23">
                             </form>
                         </div>
                         <div class="col-xs-4">
                             <form method="post" action="/playtic" class="form-inline" role="tictac">
-                            <input type="image" src="img/o.jpg" class="img-responsive center-block" id="tile33"><h1 />
+                            <input type="image" src="img/empty.jpg" class="img-responsive center-block" id="tile33"><h1 />
                             <input type="hidden" name="tile" value="tile33">
                             </form>
                         </div>
@@ -171,6 +171,9 @@
                 }).done(function(returnedString) {
                     var responce = returnedString.split(" ");
                     $('#tile' + responce[0]).attr('src', 'img/' + responce[1] + '.jpg');
+                    if (responce.length > 2) {
+                        $('#tile' + responce[2]).attr('src', 'img/' + responce[3] + '.jpg');
+                    }
                 });
             }
             else if (form.attr('role') == 'difficulty') {
