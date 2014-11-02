@@ -28,7 +28,7 @@ public class TicTaCoWeb implements SparkApplication {
                 String playerMove = Integer.toString(tileX) + Integer.toString(tileY) + " x";
                 String computerMove = "33 o";
 
-                return playerMove + " " + computerMove;
+                return playerMove + " " + computerMove + " 1 2 3";
             }
         });
         
