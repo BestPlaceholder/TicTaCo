@@ -27,13 +27,6 @@ public class TicTaCoWeb implements SparkApplication {
             }
         });
         
-        post(new Route("/selectopponent"){
-            @Override
-            public Object handle(Request request, Response response){
-                return "13 empty";
-            }
-        });
-        
         post(new Route("/selectdifficulty"){
             @Override
             public Object handle(Request request, Response response){

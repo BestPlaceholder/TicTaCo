@@ -56,30 +56,8 @@
                 </div>
             </div>
 
-            <!-- Human or computer -->
-            <div class="row" id="sectionhumanorcomputer">
-                <div class="col-12"><h1 />
-                    <ul class="list-inline">
-                        <h2 style="color:black">Select opponent</h2>
-                        <hr class="intro-divider">
-                        <li>
-                            <form method="post" action="/selectopponent" class="form-inline" role="humanorcomputer">
-                                <input type="submit" class="btn btn-default btn-lg" value="Human">
-                                <input type="hidden" name="option" value="human">
-                            </form>
-                        </li>
-                        <li>
-                            <form method="post" action="/selectopponent" class="form-inline" role="humanorcomputer">
-                                <input type="submit" class="btn btn-default btn-lg" value="Computer">
-                                <input type="hidden" name="option" value="computer">
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
             <!-- Difficulty -->
-            <div class="row hidden-xs hidden-sm hidden-md hidden-lg" id="sectiondifficulty">
+            <div class="row" id="sectiondifficulty">
                 <div class="col-12"><h1 />
                     <ul class="list-inline">
                         <h2 style="color:black">Select difficulty</h2>
@@ -193,16 +171,6 @@
                 }).done(function(returnedString) {
                     var responce = returnedString.split(" ");
                     $('#tile' + responce[0]).attr('src', 'img/' + responce[1] + '.jpg');
-                });
-            }
-            else if (form.attr('role') == 'humanorcomputer') {
-                $.ajax({
-                    type: form.attr('method'),
-                    url: form.attr('action'),
-                    data: form.serialize()
-                }).done(function(returnedString) {
-                    $('#sectionhumanorcomputer').attr('class', 'row hidden-xs hidden-sm hidden-md hidden-lg');
-                    $('#sectiondifficulty').attr('class', 'row');
                 });
             }
             else if (form.attr('role') == 'difficulty') {
