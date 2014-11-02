@@ -9,7 +9,7 @@ public class tictactoe {
 	}
 	public tictactoe(boolean Player, boolean Difficult){
 		Computer = Player;
-		Difficulty = false;
+		Difficulty = Difficult;
 	}
 
 }
