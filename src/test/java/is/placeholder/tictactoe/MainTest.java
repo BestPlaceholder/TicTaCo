@@ -38,4 +38,15 @@ public class MainTest {
     	char [][] empty = TicTacToe.makeGrid();
     	assertArrayEquals( test, TicTacToe.humanPlayerMove(0, 0, empty));
     }
+
+    @Test
+    public void TestManyHumanMovesInRow() {
+    	char [][] test = {{'X',' ','X'},{'X',' ',' '},{'X',' ','X'}};
+    	char [][] empty = TicTacToe.makeGrid();
+    	empty = TicTacToe.humanPlayerMove(0, 0, empty);
+    	empty = TicTacToe.humanPlayerMove(0, 2, empty);
+    	empty = TicTacToe.humanPlayerMove(1, 0, empty);
+    	empty = TicTacToe.humanPlayerMove(2, 0, empty);
+    	assertArrayEquals( test, TicTacToe.humanPlayerMove(2, 2, empty));
+    }
 }
