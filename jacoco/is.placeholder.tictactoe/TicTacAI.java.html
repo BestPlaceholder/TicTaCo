@@ -9,21 +9,21 @@ import java.util.Random;
  *  of a two dimensional char array and adds a move to it based on its
  *  state and the selected difficulty.
  *  To see its implementation go to
- *  &lt;a href=&quot;http://ourprettyherokuserver.com&quot;&gt;Heroku - Tic Tac Toe.&lt;/a&gt;
+ *  &lt;a href=&quot;tictaco.herokuapp.com&quot;&gt;Heroku - Tic Tac Toe.&lt;/a&gt;
  *
  *  @author Andri Mar Sigurdsson
  *************************************************************************/
 
 public class TicTacAI {
     //identity is used to keep the possible identities while me and you keep track on which ones it should reference.
-<span class="fc" id="L19">    char[] identity = {'X','O'};</span>
-    int me, you;
+<span class="fc" id="L19">    private char[] identity = {'X','O'};</span>
+    private int me, you;
     //This counter would be more important if the AI was more advanced, as it its a glorified bool value.
-<span class="fc" id="L22">    int turn = 0;</span>
+<span class="fc" id="L22">    private int turn = 0;</span>
     //Diff true/false switches difficulty on and off.
-    boolean diff;
+    private boolean diff;
     //The Constructor takes in which player the AI is and what its difficulty should be.
-<span class="fc" id="L26">    TicTacAI(char me, boolean diff){</span>
+<span class="fc" id="L26">    public TicTacAI(char me, boolean diff){</span>
 <span class="fc bfc" id="L27" title="All 2 branches covered.">        this.me = (identity[0] == me ? 0 : 1);</span>
 <span class="fc bfc" id="L28" title="All 2 branches covered.">        you = (identity[0] == me ? 1 : 0);</span>
 <span class="fc" id="L29">        this.diff = diff;</span>
