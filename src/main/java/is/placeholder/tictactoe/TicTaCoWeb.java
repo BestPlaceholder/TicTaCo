@@ -23,7 +23,21 @@ public class TicTaCoWeb implements SparkApplication {
                 //String hello = "You pressed: ";
                 String tile = request.queryParams("tile");
                 //return hello + title;
-                return tile.substring(4) + " empty ";
+                return tile.substring(4) + " empty";
+            }
+        });
+        
+        post(new Route("/selectopponent"){
+            @Override
+            public Object handle(Request request, Response response){
+                return "13 empty";
+            }
+        });
+        
+        post(new Route("/selectdifficulty"){
+            @Override
+            public Object handle(Request request, Response response){
+                return "13 empty";
             }
         });
     }
