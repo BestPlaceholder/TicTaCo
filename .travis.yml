@@ -3,6 +3,13 @@ language: java
 jdk:
   - openjdk7
 
+env:
+  global:
+    - HEROKU_API_KEY=1781a65b-f739-4132-8c13-e44dbb59dd5a
+    - HEROKU_STAGING_APP=tictaco-staging
+    - GIT_REPO=TicTaCo
+    - GIT_USER=HafdisE
+    - GIT_TOKEN=e0b91f75ff50b97b3e6f2794b793e3e97ac1d12f
 
 before_script:
   - gem install heroku
@@ -13,8 +20,7 @@ before_script:
 
 script:
   - ./gradlew check
-  - git remote add heroku git@heroku.com:tictaco-staging.git
-  - export HEROKU_API_KEY=1781a65b-f739-4132-8c13-e44dbb59dd5a
+  - git remote add heroku git@heroku.com:$HEROKU_STAGING_APP.git
   - heroku keys:clear
   - yes | heroku keys:add
   - yes | git push heroku master
@@ -27,7 +33,7 @@ after_success:
 
 deploy:
   - provider: heroku
-    api_key: 1781a65b-f739-4132-8c13-e44dbb59dd5a
+    api_key: $HEROKU_API_KEY
     strategy: git
     app:
       master: tictaco
