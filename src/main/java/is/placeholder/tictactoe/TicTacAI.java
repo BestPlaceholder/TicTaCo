@@ -16,14 +16,14 @@ import java.util.Random;
 
 public class TicTacAI {
     //identity is used to keep the possible identities while me and you keep track on which ones it should reference.
-    char[] identity = {'X','O'};
-    int me, you;
+    private char[] identity = {'X','O'};
+    private int me, you;
     //This counter would be more important if the AI was more advanced, as it its a glorified bool value.
-    int turn = 0;
+    private int turn = 0;
     //Diff true/false switches difficulty on and off.
-    boolean diff;
+    private boolean diff;
     //The Constructor takes in which player the AI is and what its difficulty should be.
-    TicTacAI(char me, boolean diff){
+    public TicTacAI(char me, boolean diff){
         this.me = (identity[0] == me ? 0 : 1);
         you = (identity[0] == me ? 1 : 0);
         this.diff = diff;
