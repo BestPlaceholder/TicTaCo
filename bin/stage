@@ -1,4 +1,5 @@
 #!/bin/bash
+
 gem install heroku
 echo "Host heroku.com" >> ~/.ssh/config
 echo "   StrictHostKeyChecking no" >> ~/.ssh/config
@@ -7,9 +8,9 @@ echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
 git remote add heroku git@heroku.com:$HEROKU_STAGING_APP.git
 heroku keys:clear
 yes | heroku keys:add
-if [ "$TRAVIS_BRANCH" = "develop" ] then
-  yes | git push heroku develop
+if [ "$TRAVIS_BRANCH" = "Develop" ]; then
+   yes | git push heroku Develop
 else
-  yes | git push heroku master
+   yes | git push heroku master
 fi
 sleep 20s
