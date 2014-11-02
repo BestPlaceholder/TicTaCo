@@ -70,5 +70,48 @@ public class TicTacAITest {
 	    }
 	}
     }
-      
+   @Test
+   public void straightRowHorCheck(){
+       char[][] turnTicker = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
+       TicTacAI AI = new TicTacAI('O',true);
+       turnTicker = AI.getMove(turnTicker);
+
+       char[][] playBoard1 = {{'X','X',' '},{' ',' ',' '},{' ',' ',' '}};
+       playBoard1 = AI.getMove(playBoard1);
+       assertEquals("To not lose the AI should play in 0 2", 'O', playBoard1[0][2]);
+
+       char[][] playBoard2 = {{' ','X','X'},{' ',' ',' '},{' ',' ',' '}};
+       playBoard2 = AI.getMove(playBoard2);
+       assertEquals("To not lose the AI should play in 0 0", 'O', playBoard2[0][0]);
+
+       char[][] playBoard3 = {{'O','O','X'},{' ',' ',' '},{' ',' ',' '}};
+       playBoard3 = AI.getMove(playBoard3);
+       assertEquals("AI should not overwrite X at 0 2", 'X', playBoard3[0][2]);
+
+       char[][] playBoard4 = {{'X',' ','X'},{' ',' ',' '},{' ',' ',' '}};
+       playBoard4 = AI.getMove(playBoard4);
+       assertEquals("To not lose the AI should play in 0 1", 'O', playBoard4[0][1]);
+   }
+    @Test
+    public void straightRowVerCheck(){
+        char[][] turnTicker = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
+        TicTacAI AI = new TicTacAI('O',true);
+        turnTicker = AI.getMove(turnTicker);
+
+        char[][] playBoard1 = {{'X',' ',' '},{'X',' ',' '},{' ',' ',' '}};
+        playBoard1 = AI.getMove(playBoard1);
+        assertEquals("To not lose the AI should play in 2 0", 'O', playBoard1[2][0]);
+
+        char[][] playBoard2 = {{' ',' ',' '},{'X',' ',' '},{'X',' ',' '}};
+        playBoard2 = AI.getMove(playBoard2);
+        assertEquals("To not lose the AI should play in 0 0", 'O', playBoard2[0][0]);
+
+        char[][] playBoard3 = {{'X',' ',' '},{' ',' ',' '},{'X',' ',' '}};
+        playBoard3 = AI.getMove(playBoard3);
+        assertEquals("To not lose the AI should play in 0 1", 'O', playBoard3[0][1]);
+
+        char[][] playBoard4 = {{'X',' ',' '},{'O',' ',' '},{'O',' ',' '}};
+        playBoard4 = AI.getMove(playBoard3);
+        assertEquals("The AI should not overwrite X in 0 0", 'X', playBoard4[0][0]);
+    }
 }
