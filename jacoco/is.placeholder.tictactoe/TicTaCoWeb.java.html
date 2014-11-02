@@ -23,9 +23,23 @@ import spark.servlet.SparkApplication;
                 //String hello = &quot;You pressed: &quot;;
 <span class="nc" id="L24">                String tile = request.queryParams(&quot;tile&quot;);</span>
                 //return hello + title;
-<span class="nc" id="L26">                return tile.substring(4) + &quot; empty &quot;;</span>
+<span class="nc" id="L26">                return tile.substring(4) + &quot; empty&quot;;</span>
             }
         });
-<span class="nc" id="L29">    }</span>
+        
+<span class="nc" id="L30">        post(new Route(&quot;/selectopponent&quot;){</span>
+            @Override
+            public Object handle(Request request, Response response){
+<span class="nc" id="L33">                return &quot;13 empty&quot;;</span>
+            }
+        });
+        
+<span class="nc" id="L37">        post(new Route(&quot;/selectdifficulty&quot;){</span>
+            @Override
+            public Object handle(Request request, Response response){
+<span class="nc" id="L40">                return &quot;13 empty&quot;;</span>
+            }
+        });
+<span class="nc" id="L43">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
