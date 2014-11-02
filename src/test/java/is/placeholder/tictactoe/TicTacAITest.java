@@ -56,9 +56,9 @@ public class TicTacAITest {
     }
     @Test
     public void randomMove(){
-	TicTacAI AI = new TicTacAI('O',true);
 	char[][] playBoard = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
 	for (int i = 0; i < 1000; i++){
+	TicTacAI AI = new TicTacAI('X',true);
 	    for(int j = 0; j < 9; j++) {
 		playBoard = AI.getMove(playBoard);
 	    }
