@@ -54,13 +54,16 @@ public class MainTest {
     	function.grid = function.humanPlayerMove(2, 0);
     	assertArrayEquals( test, function.humanPlayerMove(2, 2));
     }
-    /*
+    
     @Test
     public void TestSameHumanMoveInRow() {
     	TicTacToe function = new TicTacToe(true);
-    	function.test = {{'X',' ',' '},{' ',' ',' '},{' ',' ',' '}};
-    	test = TicTacToe.humanPlayerMove(0, 0, test);
-    	assertArrayEquals( true, function.humanTurn);
+    	function.makeGrid();
+    	char [][] testData = {{'X',' ',' '},{' ',' ',' '},{' ',' ',' '}};
+    	function.setGrid(testData);
+    	function.grid = function.humanPlayerMove(0, 0);
+    	assertEquals( true, function.getWhoToPlay());
+
     }
-    */
+    
 }

@@ -10,6 +10,9 @@ public class TicTacToe {
 		computer = player;
 		humanTurn = true;
 	}
+	public boolean getWhoToPlay(){
+		return humanTurn;
+	}
 	//An initiatior for tictactoe against computer
 	public TicTacToe(boolean player, boolean difficult){
 		computer = player;
@@ -17,6 +20,10 @@ public class TicTacToe {
 	}
 	public char[][] getGrid(){
 		return grid;
+	}
+	public void setGrid( char [][] inputGrid){
+		grid = inputGrid;
+		;
 	}
     //Makes a empty tictactoe table
 	public void makeGrid(){
