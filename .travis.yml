@@ -22,7 +22,7 @@ script:
 - yes | git push heroku master
 - sleep 20s
 - ./gradlew seleniumXvfb
-after_success:
+after_script:
 - ./gradlew jacocoTestReport
 - ./bin/update-gh-pages
 deploy:
