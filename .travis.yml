@@ -5,6 +5,7 @@ jdk:
 
 
 script:
+  - git remote -v
   - ./gradlew check
   - ./gradlew seleniumXvfb
 
