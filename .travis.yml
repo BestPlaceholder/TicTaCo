@@ -3,27 +3,36 @@ language: java
 jdk:
   - openjdk7
 
+env:
+  global:
+    - API_KEY = 1781a65b-f739-4132-8c13-e44dbb59dd5a
+    - TOKEN = e0b91f75ff50b97b3e6f2794b793e3e97ac1d12f
+
+
 before_script:
   - gem install heroku
   - echo "Host heroku.com" >> ~/.ssh/config
   - echo "   StrictHostKeyChecking no" >> ~/.ssh/config
   - echo "   CheckHostIP no" >> ~/.ssh/config
   - echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
+
 script:
   - ./gradlew check
-  - ./gradlew installApp
-  - ./gradlew jacocoTestReport
   - git remote add heroku git@heroku.com:tictaco-staging.git
-  - export HEROKU_API_KEY=1781a65b-f739-4132-8c13-e44dbb59dd5a
+  - export HEROKU_API_KEY=${API_KEY}
   - heroku keys:clear
   - yes | heroku keys:add
   - yes | git push heroku master
   - sleep 20s
   - ./gradlew seleniumXvfb
 
+after_success:
+  - ./gradlew jacocoTestReport
+  - ./bin/update-gh-pages
+
 deploy:
   - provider: heroku
-    api_key: "1781a65b-f739-4132-8c13-e44dbb59dd5a"
+    api_key: ${API_KEY}
     strategy: git
     app:
       master: tictaco

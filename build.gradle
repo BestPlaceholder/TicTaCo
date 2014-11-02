@@ -71,11 +71,11 @@ jacocoTestReport {
     reports {
         xml.enabled false
         csv.enabled false
-        html.destination "${buildDir}/resources/main/public/cc"
+        html.destination "${buildDir}/reports/jacoco"
     }
 }
 
-task stage {
-     dependsOn installApp
+
+task stage(dependsOn: installApp) {
 }
 
