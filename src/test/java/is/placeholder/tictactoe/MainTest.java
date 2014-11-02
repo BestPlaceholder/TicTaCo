@@ -14,6 +14,12 @@ public class MainTest {
     	tictactoe function = new tictactoe(false);
     	assertEquals(false, function.Computer);
     }
+    @Test
+    public void TestInitializerWith2Arguments() {
+    	tictactoe function = new tictactoe(true, true);
+    	assertEquals(true, function.Computer);
+    	assertEquals(true, function.Difficulty);
+    }
     
 }
 
