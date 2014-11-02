@@ -24,4 +24,8 @@ public class tictactoe {
 		return grid;
 	}
 
+	public static char[][] humanPlayerMove (int x, int y, char [][] grid){
+		return grid;
+	}
+
 }

@@ -31,5 +31,11 @@ public class MainTest {
     	char [][] test = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
     	assertArrayEquals( test, tictactoe.makeGrid());
     }
-}
 
+    @Test
+    public void TestLeftRightCorner() {
+    	char [][] test = {{'X',' ',' '},{' ',' ',' '},{' ',' ',' '}};
+    	char [][] empty = tictactoe.makeGrid();
+    	assertArrayEquals( test, tictactoe.humanPlayerMove(0, 0, empty));
+    }
+}
