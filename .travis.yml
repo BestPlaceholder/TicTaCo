@@ -9,7 +9,8 @@ script:
   - ./gradlew check
   - ./gradlew herokuAppDestroy
   - ./gradlew herokuAppCreate
-  - yes | git push heroku master
+  - heroku keys:add
+  - git push heroku master
   - sleep 20s
   - ./gradlew seleniumXvfb
 
