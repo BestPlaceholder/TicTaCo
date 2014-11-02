@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>TicTacToe.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TicTaCo</a> &gt; <a href="index.source.html" class="el_package">is.placeholder.tictactoe</a> &gt; <span class="el_source">TicTacToe.java</span></div><h1>TicTacToe.java</h1><pre class="source lang-java linenums">package is.placeholder.tictactoe;
+
+public class TicTacToe {
+	public boolean computer;
+	public boolean difficulty;
+	public boolean humanTurn;
+	public char grid [][];
+	//An initiatior for tictactoe against human player
+<span class="fc" id="L9">	public TicTacToe(boolean player){</span>
+<span class="fc" id="L10">		computer = player;</span>
+<span class="fc" id="L11">		humanTurn = true;</span>
+<span class="fc" id="L12">	}</span>
+	public boolean getWhoToPlay(){
+<span class="fc" id="L14">		return humanTurn;</span>
+	}
+	//An initiatior for tictactoe against computer
+<span class="fc" id="L17">	public TicTacToe(boolean player, boolean difficult){</span>
+<span class="fc" id="L18">		computer = player;</span>
+<span class="fc" id="L19">		difficulty = difficult;</span>
+<span class="fc" id="L20">	}</span>
+	public char[][] getGrid(){
+<span class="fc" id="L22">		return grid;</span>
+	}
+	public void setGrid( char [][] inputGrid){
+<span class="fc" id="L25">		grid = inputGrid;</span>
+		;
+<span class="fc" id="L27">	}</span>
+    //Makes a empty tictactoe table
+	public void makeGrid(){
+<span class="fc" id="L30">		grid = new char[3][3];</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">		for(int i = 0;i&lt;3;i++){</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">			for(int j = 0;j&lt;3;j++){</span>
+<span class="fc" id="L33">				grid[i][j]=' ';</span>
+			}
+		}
+<span class="fc" id="L36">	}</span>
+
+	public char[][] humanPlayerMove (int x, int y){
+		
+<span class="fc bfc" id="L40" title="All 2 branches covered.">		if(grid[x][y] != ' '){</span>
+<span class="fc" id="L41">			humanTurn = true;</span>
+		}
+		else{
+<span class="fc" id="L44">			grid[x][y] = 'X';</span>
+<span class="fc" id="L45">			humanTurn = false;</span>
+		}
+<span class="fc" id="L47">		return grid;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
