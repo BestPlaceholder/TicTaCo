@@ -5,37 +5,65 @@ import static org.junit.Assert.*;
 
 public class MainTest {
     @Test
-    public void TestInitializer() {
-    	tictactoe function = new tictactoe(true);
-    	assertEquals(true, function.Computer);
+    public void testInitializer() {
+    	TicTacToe function = new TicTacToe(true);
+    	assertEquals(true, function.computer);
     }
 	@Test
-    public void TestInitializer2() {
-    	tictactoe function = new tictactoe(false);
-    	assertEquals(false, function.Computer);
+    public void testInitializer2() {
+    	TicTacToe function = new TicTacToe(false);
+    	assertEquals(false, function.computer);
     }
     @Test
-    public void TestInitializerWith2Arguments() {
-    	tictactoe function = new tictactoe(true, true);
-    	assertEquals(true, function.Computer);
-    	assertEquals(true, function.Difficulty);
+    public void testInitializerWith2Arguments() {
+    	TicTacToe function = new TicTacToe(true, true);
+    	assertEquals(true, function.computer);
+    	assertEquals(true, function.difficulty);
     }
     @Test
-    public void TestInitializerWith2Arguments2() {
-    	tictactoe function = new tictactoe(true, false);
-    	assertEquals(true, function.Computer);
-    	assertEquals(false, function.Difficulty);
+    public void testInitializerWith2Arguments2() {
+    	TicTacToe function = new TicTacToe(true, false);
+    	assertEquals(true, function.computer);
+    	assertEquals(false, function.difficulty);
     }
     @Test
-    public void TestmakeGrid() {
+    public void testmakeGrid() {
     	char [][] test = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
-    	assertArrayEquals( test, tictactoe.makeGrid());
+    	TicTacToe function = new TicTacToe(true);
+    	function.makeGrid();
+    	assertArrayEquals( test, function.getGrid());
     }
 
     @Test
-    public void TestLeftRightCorner() {
+    public void testLeftRightCorner() {
+    	TicTacToe function = new TicTacToe(true);
     	char [][] test = {{'X',' ',' '},{' ',' ',' '},{' ',' ',' '}};
-    	char [][] empty = tictactoe.makeGrid();
-    	assertArrayEquals( test, tictactoe.humanPlayerMove(0, 0, empty));
+    	function.makeGrid();
+
+    	assertArrayEquals( test, function.humanPlayerMove(0, 0));
     }
+
+    @Test
+    public void testManyHumanMovesInRow() {
+    	TicTacToe function = new TicTacToe(true);
+    	char [][] test = {{'X',' ','X'},{'X',' ',' '},{'X',' ','X'}};
+    	function.makeGrid();
+    	function.grid = function.humanPlayerMove(0, 0);
+    	function.grid = function.humanPlayerMove(0, 2);
+    	function.grid = function.humanPlayerMove(1, 0);
+    	function.grid = function.humanPlayerMove(2, 0);
+    	assertArrayEquals( test, function.humanPlayerMove(2, 2));
+    }
+    
+    @Test
+    public void testSameHumanMoveInRow() {
+    	TicTacToe function = new TicTacToe(true);
+    	function.makeGrid();
+    	char [][] testData = {{'X',' ',' '},{' ',' ',' '},{' ',' ',' '}};
+    	function.setGrid(testData);
+    	function.grid = function.humanPlayerMove(0, 0);
+    	assertEquals( true, function.getWhoToPlay());
+
+    }
+    
 }
