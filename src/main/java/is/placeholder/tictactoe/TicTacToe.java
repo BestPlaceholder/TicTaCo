@@ -37,8 +37,13 @@ public class TicTacToe {
 
 	public char[][] humanPlayerMove (int x, int y){
 		
-		grid[x][y] = 'X';
-		humanTurn = false;
+		if(grid[x][y] != ' '){
+			humanTurn = true;
+		}
+		else{
+			grid[x][y] = 'X';
+			humanTurn = false;
+		}
 		return grid;
 	}
 
