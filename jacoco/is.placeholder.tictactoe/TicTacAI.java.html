@@ -54,9 +54,9 @@ public class TicTacAI {
 	    }
 	    //Checking if there is a way for it to win this turn.
 <span class="fc" id="L56">	    int[] move = rowCheck(playBoard, identity[me]);</span>
-<span class="pc bpc" id="L57" title="1 of 2 branches missed.">	    if(move != null){</span>
-<span class="nc" id="L58">		playBoard[move[0]][move[1]] = identity[me];</span>
-<span class="nc" id="L59">		return playBoard;</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">	    if(move != null){</span>
+<span class="fc" id="L58">		playBoard[move[0]][move[1]] = identity[me];</span>
+<span class="fc" id="L59">		return playBoard;</span>
 	    }
 	    //Checking if there is a way for the opponent to win next turn.
 <span class="fc" id="L62">	    move = rowCheck(playBoard, identity[you]);</span>

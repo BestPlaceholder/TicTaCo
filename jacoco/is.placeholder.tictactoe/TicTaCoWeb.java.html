@@ -20,26 +20,24 @@ import spark.servlet.SparkApplication;
 <span class="nc" id="L20">        post(new Route(&quot;/playtic&quot;){</span>
             @Override
             public Object handle(Request request, Response response){
-                //String hello = &quot;You pressed: &quot;;
-<span class="nc" id="L24">                String tile = request.queryParams(&quot;tile&quot;);</span>
-                //return hello + title;
-<span class="nc" id="L26">                return tile.substring(4) + &quot; empty&quot;;</span>
+<span class="nc" id="L23">                String tile = request.queryParams(&quot;tile&quot;);</span>
+
+<span class="nc" id="L25">                int tileX = Integer.parseInt(tile.substring(4, 5));</span>
+<span class="nc" id="L26">                int tileY = Integer.parseInt(tile.substring(5, 6));</span>
+
+<span class="nc" id="L28">                String playerMove = Integer.toString(tileX) + Integer.toString(tileY) + &quot; x&quot;;</span>
+<span class="nc" id="L29">                String computerMove = &quot;33 o&quot;;</span>
+
+<span class="nc" id="L31">                return playerMove + &quot; &quot; + computerMove + &quot; 1 2 3&quot;;</span>
             }
         });
         
-<span class="nc" id="L30">        post(new Route(&quot;/selectopponent&quot;){</span>
+<span class="nc" id="L35">        post(new Route(&quot;/selectdifficulty&quot;){</span>
             @Override
             public Object handle(Request request, Response response){
-<span class="nc" id="L33">                return &quot;13 empty&quot;;</span>
+<span class="nc" id="L38">                return &quot;13 empty&quot;;</span>
             }
         });
-        
-<span class="nc" id="L37">        post(new Route(&quot;/selectdifficulty&quot;){</span>
-            @Override
-            public Object handle(Request request, Response response){
-<span class="nc" id="L40">                return &quot;13 empty&quot;;</span>
-            }
-        });
-<span class="nc" id="L43">    }</span>
+<span class="nc" id="L41">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
