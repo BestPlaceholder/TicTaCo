@@ -30,23 +30,33 @@ dependencies {
 
     // Selenium dependencies
     seleniumCompile 'junit:junit:4.11'
-    seleniumCompile 'org.seleniumhq.selenium:selenium-java:2.39.0'
+    seleniumCompile 'org.seleniumhq.selenium:selenium-java:2.43.0'
 
     // Selenium in headless mode
     seleniumXvfbCompile 'junit:junit:4.11'
-    seleniumXvfbCompile 'org.seleniumhq.selenium:selenium-java:2.39.0'
+    seleniumXvfbCompile 'org.seleniumhq.selenium:selenium-java:2.43.0'
 }
 
 
-mainClassName = "is.placeholder.tictactoe.HelloWeb"
+mainClassName = "is.placeholder.tictactoe.TicTaCoWeb"
 
 task selenium(type: Test, dependsOn: installApp) {
     testClassesDir = sourceSets.selenium.output.classesDir
     classpath = sourceSets.selenium.runtimeClasspath
 
+    ant.condition(property: "os", value: "windows") { os(family: "windows") }
+    ant.condition(property: "os", value: "unix"   ) { os(family: "unix")    }
+
     doFirst {
         // Start Spark web app in background
-        'build/install/TicTaCo/bin/TicTaCo &'.execute()
+        switch(ant.properties.os) {
+            case 'unix':
+                'build/install/TicTaCo/bin/TicTaCo &'.execute()
+                break
+            case 'windows':
+                'build\\install\\TicTaCo\\bin\\TicTaCo.bat'.execute()
+                break
+        }
     }
 }
 
@@ -71,11 +81,11 @@ jacocoTestReport {
     reports {
         xml.enabled false
         csv.enabled false
-        html.destination "${buildDir}/resources/main/public/cc"
+        html.destination "${buildDir}/reports/jacoco"
     }
 }
 
-task stage {
-     dependsOn installApp
+
+task stage(dependsOn: installApp) {
 }
 
