@@ -1,15 +1,15 @@
 package is.placeholder.tictactoe;
 
-public class tictactoe {
+public class TicTacToe {
 	public boolean Computer;
 	public boolean Difficulty;
 
 	//An initiatior for tictactoe against human player
-	public tictactoe(boolean Player){
+	public TicTacToe(boolean Player){
 		Computer = Player;
 	}
 	//An initiatior for tictactoe against computer
-	public tictactoe(boolean Player, boolean Difficult){
+	public TicTacToe(boolean Player, boolean Difficult){
 		Computer = Player;
 		Difficulty = Difficult;
 	}
