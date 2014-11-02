@@ -30,11 +30,11 @@ dependencies {
 
     // Selenium dependencies
     seleniumCompile 'junit:junit:4.11'
-    seleniumCompile 'org.seleniumhq.selenium:selenium-java:2.39.0'
+    seleniumCompile 'org.seleniumhq.selenium:selenium-java:2.43.0'
 
     // Selenium in headless mode
     seleniumXvfbCompile 'junit:junit:4.11'
-    seleniumXvfbCompile 'org.seleniumhq.selenium:selenium-java:2.39.0'
+    seleniumXvfbCompile 'org.seleniumhq.selenium:selenium-java:2.43.0'
 }
 
 
