@@ -91,6 +91,11 @@ public class TicTacAITest {
        char[][] playBoard4 = {{'X',' ','X'},{' ',' ',' '},{' ',' ',' '}};
        playBoard4 = AI.getMove(playBoard4);
        assertEquals("To not lose the AI should play in 0 1", 'O', playBoard4[0][1]);
+
+       char[][] playBoard5 = {{'O',' ','O'},{' ',' ',' '},{' ',' ',' '}};
+       playBoard5 = AI.getMove(playBoard5);
+       assertEquals("To win the AI should play in 0 1", 'O', playBoard5[0][1]);
+
    }
     @Test
     public void straightRowVerCheck(){
