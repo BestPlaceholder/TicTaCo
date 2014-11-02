@@ -12,7 +12,7 @@ package is.placeholder.tictactoe.MainWebTest;
 
         import java.util.concurrent.TimeUnit;
 
-public class MainWebTest {
+public class TicTaCoWebTest {
 
     static WebDriver driver;
     static String baseUrl;
@@ -26,7 +26,7 @@ public class MainWebTest {
         if(port == null) {
             port = "4567";
         }
-        baseUrl = "http://localhost:" + port;
+        baseUrl = "http://"+System.getenv("HEROKU_STAGING_APP")+".herokuapp.com";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 

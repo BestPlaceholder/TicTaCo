@@ -44,9 +44,19 @@ task selenium(type: Test, dependsOn: installApp) {
     testClassesDir = sourceSets.selenium.output.classesDir
     classpath = sourceSets.selenium.runtimeClasspath
 
+    ant.condition(property: "os", value: "windows") { os(family: "windows") }
+    ant.condition(property: "os", value: "unix"   ) { os(family: "unix")    }
+
     doFirst {
         // Start Spark web app in background
-        'build/install/TicTaCo/bin/TicTaCo &'.execute()
+        switch(ant.properties.os) {
+            case 'unix':
+                'build/install/TicTaCo/bin/TicTaCo &'.execute()
+                break
+            case 'windows':
+                'build\\install\\TicTaCo\\bin\\TicTaCo.bat'.execute()
+                break
+        }
     }
 }
 
