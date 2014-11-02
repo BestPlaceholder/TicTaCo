@@ -108,7 +108,7 @@ public class TicTacAITest {
 
         char[][] playBoard3 = {{'X',' ',' '},{' ',' ',' '},{'X',' ',' '}};
         playBoard3 = AI.getMove(playBoard3);
-        assertEquals("To not lose the AI should play in 0 1", 'O', playBoard3[0][1]);
+        assertEquals("To not lose the AI should play in 1 0", 'O', playBoard3[1][0]);
 
         char[][] playBoard4 = {{'X',' ',' '},{'O',' ',' '},{'O',' ',' '}};
         playBoard4 = AI.getMove(playBoard3);
