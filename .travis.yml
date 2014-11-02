@@ -13,6 +13,7 @@ script:
 - ./gradlew check && ./bin/stage && ./gradlew seleniumXvfb
 
 after_script:
+- ./gradlew test
 - ./gradlew jacocoTestReport
 - ./bin/update-gh-pages
 

@@ -56,30 +56,8 @@
                 </div>
             </div>
 
-            <!-- Human or computer -->
-            <div class="row" id="sectionhumanorcomputer">
-                <div class="col-12"><h1 />
-                    <ul class="list-inline">
-                        <h2 style="color:black">Select opponent</h2>
-                        <hr class="intro-divider">
-                        <li>
-                            <form method="post" action="/selectopponent" class="form-inline" role="humanorcomputer">
-                                <input type="submit" class="btn btn-default btn-lg" value="Human">
-                                <input type="hidden" name="option" value="human">
-                            </form>
-                        </li>
-                        <li>
-                            <form method="post" action="/selectopponent" class="form-inline" role="humanorcomputer">
-                                <input type="submit" class="btn btn-default btn-lg" value="Computer">
-                                <input type="hidden" name="option" value="computer">
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
             <!-- Difficulty -->
-            <div class="row hidden-xs hidden-sm hidden-md hidden-lg" id="sectiondifficulty">
+            <div class="row" id="sectiondifficulty">
                 <div class="col-12"><h1 />
                     <ul class="list-inline">
                         <h2 style="color:black">Select difficulty</h2>
@@ -106,19 +84,19 @@
                     <div class="row">
                         <div class="col-xs-4">
                             <form method="post" action="/playtic" class="form-inline" role="tictac">
-                            <input type="image" src="img/x.jpg" class="img-responsive center-block" id="tile11"><h1 />
+                            <input type="image" src="img/empty.jpg" class="img-responsive center-block" id="tile11"><h1 />
                             <input type="hidden" name="tile" value="tile11">
                             </form>
                         </div>
                         <div class="col-xs-4">
                             <form method="post" action="/playtic" class="form-inline" role="tictac" name="test">
-                            <input type="image" src="img/o.jpg" class="img-responsive center-block" id="tile21"><h1 />
+                            <input type="image" src="img/empty.jpg" class="img-responsive center-block" id="tile21"><h1 />
                             <input type="hidden" name="tile" value="tile21">
                             </form>
                         </div>
                         <div class="col-xs-4">
                             <form method="post" action="/playtic" class="form-inline" role="tictac">
-                            <input type="image" src="img/x.jpg" class="img-responsive center-block" id="tile31"><h1 />
+                            <input type="image" src="img/empty.jpg" class="img-responsive center-block" id="tile31"><h1 />
                             <input type="hidden" name="tile" value="tile31">
                             </form>
                         </div>
@@ -127,7 +105,7 @@
                     <div class="row">
                         <div class="col-xs-4">
                             <form method="post" action="/playtic" class="form-inline" role="tictac">
-                            <input type="image" src="img/x.jpg" class="img-responsive center-block" id="tile12"><h1 />
+                            <input type="image" src="img/empty.jpg" class="img-responsive center-block" id="tile12"><h1 />
                             <input type="hidden" name="tile" value="tile12">
                             </form>
                         </div>
@@ -139,7 +117,7 @@
                         </div>
                         <div class="col-xs-4">
                             <form method="post" action="/playtic" class="form-inline" role="tictac">
-                            <input type="image" src="img/x.jpg" class="img-responsive center-block" id="tile32"><h1 />
+                            <input type="image" src="img/empty.jpg" class="img-responsive center-block" id="tile32"><h1 />
                             <input type="hidden" name="tile" value="tile32">
                             </form>
                         </div>
@@ -148,23 +126,28 @@
                     <div class="row">
                         <div class="col-xs-4">
                             <form method="post" action="/playtic" class="form-inline" role="tictac">
-                            <input type="image" src="img/x.jpg" class="img-responsive center-block" id="tile13"><h1 />
+                            <input type="image" src="img/empty.jpg" class="img-responsive center-block" id="tile13"><h1 />
                             <input type="hidden" name="tile" value="tile13">
                             </form>
                         </div>
                         <div class="col-xs-4">
                             <form method="post" action="/playtic" class="form-inline" role="tictac">
-                            <input type="image" src="img/x.jpg" class="img-responsive center-block" id="tile23"><h1 />
+                            <input type="image" src="img/empty.jpg" class="img-responsive center-block" id="tile23"><h1 />
                             <input type="hidden" name="tile" value="tile23">
                             </form>
                         </div>
                         <div class="col-xs-4">
                             <form method="post" action="/playtic" class="form-inline" role="tictac">
-                            <input type="image" src="img/o.jpg" class="img-responsive center-block" id="tile33"><h1 />
+                            <input type="image" src="img/empty.jpg" class="img-responsive center-block" id="tile33"><h1 />
                             <input type="hidden" name="tile" value="tile33">
                             </form>
                         </div>
                     </div>
+                </div>
+                <div class="col-xs-2">
+                    <div id="playerscore" class="alert alert-info">Player: 0</div>
+                    <div id="computerscore" class="alert alert-info">Computer: 0</div>
+                    <div id="ties" class="alert alert-info">Ties: 0</div>
                 </div>
             </div>
         </div>
@@ -193,16 +176,27 @@
                 }).done(function(returnedString) {
                     var responce = returnedString.split(" ");
                     $('#tile' + responce[0]).attr('src', 'img/' + responce[1] + '.jpg');
-                });
-            }
-            else if (form.attr('role') == 'humanorcomputer') {
-                $.ajax({
-                    type: form.attr('method'),
-                    url: form.attr('action'),
-                    data: form.serialize()
-                }).done(function(returnedString) {
-                    $('#sectionhumanorcomputer').attr('class', 'row hidden-xs hidden-sm hidden-md hidden-lg');
-                    $('#sectiondifficulty').attr('class', 'row');
+                    // Check if the responce contains a move from the computer
+                    if (responce.length > 2) {
+                        $('#tile' + responce[2]).attr('src', 'img/' + responce[3] + '.jpg');
+                    }
+                    // Check if the responce contains a changed tie score
+                    if (responce.length > 8) {
+                        $('#ties').html('Ties: ' + responce[6]).attr('class', 'alert alert-success');
+                    }
+                    // Check if the responce contains a changed computer score
+                    else if (responce.length > 7) {
+                        $('#computerscore').html('Computer: ' + responce[5]).attr('class', 'alert alert-danger');
+                    }
+                    // Check if the responce contains a changed player score
+                    else if (responce.length > 6) {
+                        $('#playerscore').html('Player: ' + responce[4]).attr('class', 'alert alert-warning');
+                    }
+                    else {
+                        $('#ties').attr('class', 'alert alert-info');
+                        $('#computerscore').attr('class', 'alert alert-info');
+                        $('#playerscore').attr('class', 'alert alert-info');
+                    }
                 });
             }
             else if (form.attr('role') == 'difficulty') {

@@ -85,7 +85,6 @@ jacocoTestReport {
     }
 }
 
-
 task stage(dependsOn: installApp) {
 }
 
