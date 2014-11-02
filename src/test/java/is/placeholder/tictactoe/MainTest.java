@@ -65,5 +65,13 @@ public class MainTest {
     	assertEquals( true, function.getWhoToPlay());
 
     }
-    
+
+    @Test
+    public void testIfPlayerHasWon(){
+    	TicTacToe function = new TicTacToe(true);
+    	function.makeGrid();
+    	char [][] testData = {{'X','X','X'},{' ',' ',' '},{' ',' ',' '}};
+    	function.setGrid(testData);
+    	assertEquals( 2, function.hasWon());
+    }
 }

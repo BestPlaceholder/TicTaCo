@@ -46,5 +46,13 @@ public class TicTacToe {
 		}
 		return grid;
 	}
+	//A test that searches through the grid and
+	//cheacks if the player or computer has won
+	//and a draw has occurred. 0 = Game not over, 1 = draw
+	// 2 = player has won, 3 = computer has won
+	public int hasWon(){
+
+		return 0;
+	}
 
 }
