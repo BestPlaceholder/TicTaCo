@@ -67,10 +67,11 @@ public class MainTest {
     }
     @Test
     public void testComputerMoveBadAI() {
-        TicTacToe function = new TicTacToe (true, false);
-        function.humanPlayerMove(0,1);
+        TicTacToe function = new TicTacToe (true, true);
+        char[][] input = {{'X',' ',' '},{' ',' ',' '},{' ',' ',' '}};
+        function.setGrid(input);
         int [] testData = {1,1};
-        assertArrayEquals(testData, function.computerMove(function.getGrid()));
+        assertArrayEquals(testData, function.computerMove(input));
 
     }
 
