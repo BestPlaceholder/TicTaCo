@@ -8,8 +8,8 @@ git remote add heroku git@heroku.com:$HEROKU_STAGING_APP.git
 heroku keys:clear
 yes | heroku keys:add
 if [ "$TRAVIS_BRANCH" = "Develop" ]; then
-  yes | git push heroku Develop
+   yes | git push heroku Develop
 else
-  yes | git push heroku master
+   yes | git push heroku master
 fi
 sleep 20s
