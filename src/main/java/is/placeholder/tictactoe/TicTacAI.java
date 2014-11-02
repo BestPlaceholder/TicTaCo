@@ -11,7 +11,7 @@ import java.util.Random;
  *  To see its implementation go to
  *  <a href="http://ourprettyherokuserver.com">Heroku - Tic Tac Toe.</a>
  *
- *  @author Andri Már Sigurðsson
+ *  @author Andri Mar Sigurdsson
  *************************************************************************/
 
 public class TicTacAI {
