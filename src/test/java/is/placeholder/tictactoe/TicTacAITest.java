@@ -64,7 +64,7 @@ public class TicTacAITest {
 	    }
 	    for(int h = 0; h < 3; h++){
 		for (int k = 0; k < 3; k++){
-		    assertEquals("These fields should all contain X", "X", playBoard[h][k]);
+		    assertEquals("These fields should all contain X", 'X', playBoard[h][k]);
 		    playBoard[h][k] = ' ';
 		}
 	    }
