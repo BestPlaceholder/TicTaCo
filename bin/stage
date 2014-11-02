@@ -7,5 +7,9 @@ echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
 git remote add heroku git@heroku.com:$HEROKU_STAGING_APP.git
 heroku keys:clear
 yes | heroku keys:add
-yes | git push heroku master
+if [ "$TRAVIS_BRANCH" = "develop" ] then
+  yes | git push heroku develop
+else
+  yes | git push heroku master
+fi
 sleep 20s
