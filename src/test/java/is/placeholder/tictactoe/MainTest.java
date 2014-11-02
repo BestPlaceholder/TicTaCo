@@ -70,6 +70,7 @@ public class MainTest {
         TicTacToe function = new TicTacToe (true, true);
         char[][] input = {{'X',' ',' '},{' ',' ',' '},{' ',' ',' '}};
         function.setGrid(input);
+
         int [] testData = {1,1};
         assertArrayEquals(testData, function.computerMove(input));
 
