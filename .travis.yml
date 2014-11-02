@@ -11,6 +11,8 @@ before_script:
   - echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
 script:
   - ./gradlew check
+  - ./gradlew installApp
+  - ./gradlew jacocoTestReport
   - git remote add heroku git@heroku.com:tictaco-staging.git
   - export HEROKU_API_KEY=1781a65b-f739-4132-8c13-e44dbb59dd5a
   - heroku keys:clear
