@@ -6,95 +6,270 @@ public class TicTacToe {
 	public boolean humanTurn;
 	public char grid [][];
 	private TicTacAI AI;
-	//An initiatior for tictactoe against human player
-<span class="fc" id="L10">	public TicTacToe(boolean player){</span>
-<span class="fc" id="L11">		computer = player;</span>
-<span class="fc" id="L12">		humanTurn = true;</span>
-<span class="fc" id="L13">		makeGrid();</span>
+	private int playerScore;
+	private int computerScore;
+	private int tieScore;
+	private boolean gameHasBeenWon;
+	
+	/**
+	*	Constructor for human vs human
+	*
+	*	@param player decides player state
+	*/
+<span class="fc" id="L19">	public TicTacToe(boolean player){</span>
+<span class="fc" id="L20">		computer = player;</span>
+<span class="fc" id="L21">		humanTurn = true;</span>
+<span class="fc" id="L22">		makeGrid();</span>
 
-<span class="fc" id="L15">	}</span>
-	public boolean getWhoToPlay(){
-<span class="fc" id="L17">		return humanTurn;</span>
-	}
-	//An initiatior for tictactoe against computer
-<span class="fc" id="L20">	public TicTacToe(boolean player, boolean difficult){</span>
-<span class="fc" id="L21">		computer = player;</span>
-<span class="fc" id="L22">		difficulty = difficult;</span>
-<span class="fc" id="L23">		makeGrid();</span>
 <span class="fc" id="L24">	}</span>
-	public char[][] getGrid(){
-<span class="fc" id="L26">		return grid;</span>
+	/**
+	*	Returns which players turn it is.
+	*
+	*	@return A boolean value for which players turn is now.
+	*/
+	public boolean getWhoToPlay(){
+<span class="fc" id="L31">		return humanTurn;</span>
 	}
+	/**
+	* 	Constructor for human vs AI
+	*
+	*	@param player decides player state.
+	*	@param difficult decides AI difficulty.
+	*/
+<span class="fc" id="L39">	public TicTacToe(boolean player, boolean difficult){</span>
+<span class="fc" id="L40">		computer = player;</span>
+<span class="fc" id="L41">		difficulty = difficult;</span>
+<span class="fc" id="L42">		humanTurn = true;</span>
+<span class="fc" id="L43">		playerScore = 0;</span>
+<span class="fc" id="L44">		computerScore = 0;</span>
+<span class="fc" id="L45">		tieScore = 0;</span>
+<span class="fc" id="L46">		gameHasBeenWon = false;</span>
+<span class="fc" id="L47">		makeGrid();</span>
+<span class="fc" id="L48">	}</span>
+
+	/**
+	* 	A function for getting the play grid
+	*
+	*	@return grid a 3x3 two dimensional char array that represents the player grid
+	*/
+	public char[][] getGrid(){
+<span class="fc" id="L56">		return grid;</span>
+	}
+
+	/**
+	* 	A function for setting the playgrid
+	*/
 	public void setGrid( char [][] inputGrid){
-<span class="fc" id="L29">		grid = inputGrid;</span>
-		;
-<span class="fc" id="L31">	}</span>
-    //Makes a empty tictactoe table
+<span class="fc" id="L63">		grid = inputGrid;</span>
+<span class="fc" id="L64">	}</span>
+
+	/**
+	*	A function for reseting the play board
+	*/
 	public void makeGrid(){
-<span class="fc" id="L34">		grid = new char[3][3];</span>
-<span class="fc bfc" id="L35" title="All 2 branches covered.">		for(int i = 0;i&lt;3;i++){</span>
-<span class="fc bfc" id="L36" title="All 2 branches covered.">			for(int j = 0;j&lt;3;j++){</span>
-<span class="fc" id="L37">				grid[i][j]=' ';</span>
+<span class="fc" id="L70">		grid = new char[3][3];</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">		for(int i = 0;i&lt;3;i++){</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">			for(int j = 0;j&lt;3;j++){</span>
+<span class="fc" id="L73">				grid[i][j]=' ';</span>
 			}
 		}
-<span class="fc" id="L40">		AI = new TicTacAI('O' ,difficulty);</span>
-<span class="fc" id="L41">	}</span>
+<span class="fc" id="L76">		AI = new TicTacAI('O' ,difficulty);</span>
+<span class="fc" id="L77">		humanTurn = true;</span>
+<span class="fc" id="L78">		gameHasBeenWon = false;</span>
+<span class="fc" id="L79">	}</span>
 
+	/**
+	*	A function for taking in the human players moves and applying them ot the grid
+	*	@param x The X coordinates.
+	*	@param y The Y coordinates.
+	*	@return grid The changed grid
+	*/
 	public char[][] humanPlayerMove (int x, int y){
-		
-<span class="fc bfc" id="L45" title="All 2 branches covered.">		if(grid[x][y] != ' '){</span>
-<span class="fc" id="L46">			humanTurn = true;</span>
+<span class="pc bpc" id="L88" title="1 of 4 branches missed.">		if(grid[x][y] != ' ' || !humanTurn){</span>
+<span class="fc" id="L89">			return null;</span>
 		}
 		else{
-<span class="fc" id="L49">			grid[x][y] = 'X';</span>
-<span class="fc" id="L50">			humanTurn = false;</span>
+<span class="fc" id="L92">			grid[x][y] = 'X';</span>
+<span class="fc" id="L93">			humanTurn = false;</span>
+<span class="fc" id="L94">			return grid;</span>
 		}
-<span class="fc" id="L52">		return grid;</span>
 	}
 
+	/**
+	*	A function that queries the AI for a move and turns it into numeric coordinates.
+	*
+	*	@param inputGrid the grid to pass on to the AI
+	* 	@return intArray an array with the x-y coordinates		
+	*/
 	public int [] computerMove (char [][] inputGrid)
 	{
-<span class="fc" id="L57">		char[][] previousGrid = new char[3][3]; </span>
-<span class="fc bfc" id="L58" title="All 2 branches covered.">		for (int i = 0; i &lt; 3; i++){</span>
-<span class="fc bfc" id="L59" title="All 2 branches covered.">			for (int j = 0 ; j &lt; 3 ; j++){</span>
-<span class="fc" id="L60">				previousGrid[i][j] = inputGrid[i][j];</span>
+<span class="fc" id="L106">		hasWon();</span>
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">		if (gameHasBeenWon) return null;</span>
+<span class="fc" id="L108">		char[][] previousGrid = new char[3][3]; </span>
+<span class="fc bfc" id="L109" title="All 2 branches covered.">		for (int i = 0; i &lt; 3; i++){</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">			for (int j = 0 ; j &lt; 3 ; j++){</span>
+<span class="fc" id="L111">				previousGrid[i][j] = inputGrid[i][j];</span>
 			}
 		}
-<span class="fc" id="L63">		inputGrid = AI.getMove(inputGrid);</span>
-<span class="pc bpc" id="L64" title="1 of 2 branches missed.">		if (inputGrid == null) return null;</span>
-<span class="fc" id="L65">		int [] returnValue = new int [2];</span>
-<span class="pc bpc" id="L66" title="1 of 2 branches missed.">		for(int i = 0;i&lt;3;i++){</span>
-<span class="fc bfc" id="L67" title="All 2 branches covered.">			for(int j = 0;j&lt;3;j++){</span>
-<span class="fc bfc" id="L68" title="All 2 branches covered.">				if (previousGrid[i][j] != grid[i][j]){</span>
-<span class="fc" id="L69">					returnValue[0] = i;</span>
-<span class="fc" id="L70">					returnValue[1] = j;</span>
-<span class="fc" id="L71">					return returnValue;</span>
+<span class="fc" id="L114">		inputGrid = AI.getMove(inputGrid);</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">		if (inputGrid == null) return null;</span>
+<span class="fc" id="L116">		int [] returnValue = new int [2];</span>
+<span class="pc bpc" id="L117" title="1 of 2 branches missed.">		for(int i = 0;i&lt;3;i++){</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">			for(int j = 0;j&lt;3;j++){</span>
+<span class="fc bfc" id="L119" title="All 2 branches covered.">				if (previousGrid[i][j] != grid[i][j]){</span>
+<span class="fc" id="L120">					returnValue[0] = i;</span>
+<span class="fc" id="L121">					returnValue[1] = j;</span>
+<span class="fc" id="L122">					humanTurn = true;</span>
+<span class="fc" id="L123">					return returnValue;</span>
 				}
 			}
 		}
-<span class="nc" id="L75">		return returnValue;</span>
+<span class="nc" id="L127">		humanTurn = true;</span>
+<span class="nc" id="L128">		return returnValue;</span>
 	}
+
+	/**
+	*	A function for calculating the game score
+	*
+	*	@param gameEnd The end state of the game
+	*/
+	public void calculateScores(int gameEnd) {
+<span class="nc bnc" id="L137" title="All 2 branches missed.">		if(gameEnd == 2){</span>
+<span class="nc" id="L138">			playerScore++;</span>
+		}
+<span class="nc bnc" id="L140" title="All 2 branches missed.">		else if(gameEnd == 3){</span>
+<span class="nc" id="L141">			computerScore++;</span>
+		}
+<span class="nc bnc" id="L143" title="All 2 branches missed.">		else if (gameEnd == 1){</span>
+<span class="nc" id="L144">			tieScore++;</span>
+		}
+<span class="nc" id="L146">	}</span>
 
 	//A test that searches through the grid and
 	//cheacks if the player or computer has won
 	//and a draw has occurred. 0 = Game not over, 1 = draw
 	// 2 = player has won, 3 = computer has won
+	/**
+	*	A function for checking if either player has won the game.
+	*
+	*	@return gameEnd The win state of the game.
+	*/
 	public int hasWon(){
+<span class="fc" id="L158">		char hasWon = ' ';</span>
+<span class="fc" id="L159">		hasWon = checkSideWay();</span>
+<span class="fc bfc" id="L160" title="All 2 branches covered.">		if(hasWon == ' '){</span>
+<span class="fc" id="L161">			hasWon = checkUpDown();</span>
+		}
+<span class="fc bfc" id="L163" title="All 2 branches covered.">		if(hasWon == ' '){</span>
+<span class="fc" id="L164">			hasWon = checkSideWay();</span>
+		}
+<span class="fc bfc" id="L166" title="All 2 branches covered.">		if(hasWon == ' '){</span>
+<span class="fc" id="L167">			hasWon = checkCross();</span>
+		}
+<span class="fc" id="L169">		int count = gridCounter();</span>
+<span class="fc bfc" id="L170" title="All 2 branches covered.">		if(hasWon == 'X'){</span>
+<span class="fc" id="L171">			gameHasBeenWon = true;</span>
+<span class="fc" id="L172">			return 2;</span>
+		}
+<span class="pc bpc" id="L174" title="1 of 2 branches missed.">		if(hasWon == 'O'){</span>
+<span class="nc" id="L175">			gameHasBeenWon = true;</span>
+<span class="nc" id="L176">			return 3;</span>
+		}
+<span class="pc bpc" id="L178" title="1 of 2 branches missed.">		if (count == 9){</span>
+<span class="nc" id="L179">			gameHasBeenWon = true;</span>
+<span class="nc" id="L180">			return 1;</span>
+		}
+<span class="fc" id="L182">			return 0;</span>
 		
-<span class="fc" id="L84">		return 2;</span>
 	}
 
 
+		private char checkCross() {
+<span class="pc bpc" id="L188" title="4 of 6 branches missed.">		if(grid[0][0] != ' ' &amp;&amp; grid[0][0] == grid[1][1] &amp;&amp; grid[1][1] == grid[2][2]){</span>
+<span class="nc" id="L189">			return grid[0][0];</span>
+		}
+<span class="pc bpc" id="L191" title="5 of 6 branches missed.">		if(grid[0][2] != ' ' &amp;&amp; grid[0][2] == grid[1][1] &amp;&amp; grid[1][1] == grid[2][0]){</span>
+<span class="nc" id="L192">			return grid[0][2];</span>
+		}
+
+<span class="fc" id="L195">		return ' ';</span>
+	}
+
+	/**
+	*	A function for checking if someone has won the game
+	*
+	*	@return The win state of the game
+	*/
+	public boolean hasGameBeenWon() {
+<span class="nc" id="L204">		return gameHasBeenWon;</span>
+	}
+
+	private char checkUpDown() {
+<span class="pc bpc" id="L208" title="4 of 6 branches missed.">		if(grid[0][0] != ' ' &amp;&amp; grid[0][0] == grid[1][0] &amp;&amp; grid[1][0] == grid[2][0]){</span>
+<span class="nc" id="L209">			return grid[0][0];</span>
+		}
+<span class="pc bpc" id="L211" title="5 of 6 branches missed.">		if(grid[0][1] != ' ' &amp;&amp; grid[0][1] == grid[1][1] &amp;&amp; grid[1][1] == grid[2][1]){</span>
+<span class="nc" id="L212">			return grid[0][1];</span>
+		}
+<span class="pc bpc" id="L214" title="5 of 6 branches missed.">		if(grid[0][2] != ' ' &amp;&amp; grid[0][2] == grid[1][2] &amp;&amp; grid[1][2] == grid[2][2]){</span>
+<span class="nc" id="L215">			return grid[0][2];</span>
+		}
+<span class="fc" id="L217">		return ' ';</span>
+	}
+
+	private char checkSideWay() {
+<span class="pc bpc" id="L221" title="2 of 6 branches missed.">		if(grid[0][0] != ' ' &amp;&amp; grid[0][0] == grid[0][1] &amp;&amp; grid[0][1] == grid[0][2]){</span>
+<span class="fc" id="L222">			return grid[0][0];</span>
+		}
+<span class="pc bpc" id="L224" title="5 of 6 branches missed.">		if(grid[1][0] != ' ' &amp;&amp; grid[1][0] == grid[1][1] &amp;&amp; grid[1][1] == grid[1][2]){</span>
+<span class="nc" id="L225">			return grid[1][0];</span>
+		}
+<span class="pc bpc" id="L227" title="5 of 6 branches missed.">		if(grid[2][0] != ' ' &amp;&amp; grid[2][0] == grid[2][1] &amp;&amp; grid[2][1] == grid[2][2]){</span>
+<span class="nc" id="L228">			return grid[2][0];</span>
+		}
+<span class="fc" id="L230">		return ' ';</span>
+	}
+
+	/**
+	*	A function for counting how many tiles have been filled
+	*
+	*	@return tileCount a Int value containing the number of filled tiles
+	*/
+	public int gridCounter(){
+<span class="fc" id="L239">		int counter = 0;</span>
+<span class="fc bfc" id="L240" title="All 2 branches covered.">		for(int i = 0;i&lt;3;i++){</span>
+<span class="fc bfc" id="L241" title="All 2 branches covered.">			for(int j = 0;j&lt;3;j++){</span>
+<span class="fc bfc" id="L242" title="All 2 branches covered.">				if (grid[i][j] != ' '){</span>
+<span class="fc" id="L243">					counter++;</span>
+				}
+			}
+		}
+<span class="fc" id="L247">		return counter;	</span>
+	}
+
+	/**
+	*	A function for getting the player score
+	*
+	*	@return playerScore a int value for the player score
+	*/
 	public int getPlayerScore() {
-<span class="nc" id="L89">		return 1;</span>
+<span class="nc" id="L256">		return playerScore;</span>
 	}
-
+	/**
+	*	A function for getting the computerscore
+	*
+	*	@return computerScore a int value for the computer score
+	*/
 	public int getComputerScore() {
-<span class="nc" id="L93">		return 2;</span>
+<span class="nc" id="L264">		return computerScore;</span>
 	}
-
+	/**
+	*	A function for getting the tie score
+	*
+	*	@return tieScore a int value for the tie score
+	*/
 	public int getTieScore() {
-<span class="nc" id="L97">		return 3;</span>
+<span class="nc" id="L272">		return tieScore;</span>
 	}
 
 }

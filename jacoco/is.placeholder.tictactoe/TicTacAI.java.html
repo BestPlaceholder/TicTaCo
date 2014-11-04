@@ -22,166 +22,173 @@ public class TicTacAI {
 <span class="fc" id="L22">    private int turn = 0;</span>
     //Diff true/false switches difficulty on and off.
     private boolean diff;
-    //The Constructor takes in which player the AI is and what its difficulty should be.
-<span class="fc" id="L26">    public TicTacAI(char me, boolean diff){</span>
-<span class="fc bfc" id="L27" title="All 2 branches covered.">        this.me = (identity[0] == me ? 0 : 1);</span>
-<span class="fc bfc" id="L28" title="All 2 branches covered.">        you = (identity[0] == me ? 1 : 0);</span>
-<span class="fc" id="L29">        this.diff = diff;</span>
-<span class="fc" id="L30">    }</span>
+    /**
+     * Constructs TicTacAI with its character representation and AI difficulty
+     *
+     * @param me The character that represents the AI in the game.
+     * @param diff The difficulty setting of the AI
+     */
+<span class="fc" id="L31">    public TicTacAI(char me, boolean diff){</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        this.me = (identity[0] == me ? 0 : 1);</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        you = (identity[0] == me ? 1 : 0);</span>
+<span class="fc" id="L34">        this.diff = diff;</span>
+<span class="fc" id="L35">    }</span>
 
-    /*
+    /**
      *  getMove takes in a playboard and plays a move on them based on difficulty and board state.
      *  If the difficulty is on it has set starting moves as well as going for the win
-     *  and blocking opponent wins when it can.
-     *  if its not it just plays completely random moves
+     *  and blocking opponent wins when it can.  If its not it just plays completely random moves
+     *
+     *  @param playBoard A 3x3 two dimensional char array that contains the current state of the game
+     *  @return playBoard A 3x3 two dimensional char array with the added AI move
      */
     public char[][] getMove(char playBoard[][]){
-<span class="pc bpc" id="L39" title="1 of 2 branches missed.">        if (!hasMoves(playBoard)) return null;</span>
-<span class="fc" id="L40">	turn++;</span>
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">        if (!hasMoves(playBoard)) return null;</span>
+<span class="fc" id="L47">	turn++;</span>
 	//Gets skipped if the difficulty is off
-<span class="fc bfc" id="L42" title="All 2 branches covered.">	if(diff){</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">	if(diff){</span>
 	    //For more consistent difficulty it plays set first turns
-<span class="fc bfc" id="L44" title="All 4 branches covered.">	    if(turn == 1 &amp;&amp; identity[me] == 'X'){</span>
-<span class="fc" id="L45">		playBoard[0][0] = 'X';</span>
-<span class="fc" id="L46">		return playBoard;</span>
-<span class="pc bpc" id="L47" title="1 of 4 branches missed.">	    }else if (turn == 1 &amp;&amp; identity[me] == 'O'){</span>
-<span class="fc bfc" id="L48" title="All 2 branches covered.">		if (playBoard[1][1] == 'X'){</span>
-<span class="fc" id="L49">		    playBoard[0][0] = 'O';</span>
-<span class="fc" id="L50">		    return playBoard;</span>
+<span class="fc bfc" id="L51" title="All 4 branches covered.">	    if(turn == 1 &amp;&amp; identity[me] == 'X'){</span>
+<span class="fc" id="L52">		playBoard[0][0] = 'X';</span>
+<span class="fc" id="L53">		return playBoard;</span>
+<span class="pc bpc" id="L54" title="1 of 4 branches missed.">	    }else if (turn == 1 &amp;&amp; identity[me] == 'O'){</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">		if (playBoard[1][1] == 'X'){</span>
+<span class="fc" id="L56">		    playBoard[0][0] = 'O';</span>
+<span class="fc" id="L57">		    return playBoard;</span>
 		}else {
-<span class="fc" id="L52">		    playBoard[1][1] = 'O';</span>
-<span class="fc" id="L53">		    return playBoard;</span>
+<span class="fc" id="L59">		    playBoard[1][1] = 'O';</span>
+<span class="fc" id="L60">		    return playBoard;</span>
 		}
 	    }
 	    //Checking if there is a way for it to win this turn.
-<span class="fc" id="L57">	    int[] move = rowCheck(playBoard, identity[me]);</span>
-<span class="fc bfc" id="L58" title="All 2 branches covered.">	    if(move != null){</span>
-<span class="fc" id="L59">		playBoard[move[0]][move[1]] = identity[me];</span>
-<span class="fc" id="L60">		return playBoard;</span>
+<span class="fc" id="L64">	    int[] move = rowCheck(playBoard, identity[me]);</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">	    if(move != null){</span>
+<span class="fc" id="L66">		playBoard[move[0]][move[1]] = identity[me];</span>
+<span class="fc" id="L67">		return playBoard;</span>
 	    }
 	    //Checking if there is a way for the opponent to win next turn.
-<span class="fc" id="L63">	    move = rowCheck(playBoard, identity[you]);</span>
-<span class="fc bfc" id="L64" title="All 2 branches covered.">	    if(move != null){</span>
-<span class="fc" id="L65">		playBoard[move[0]][move[1]] = identity[me];</span>
-<span class="fc" id="L66">		return playBoard;</span>
+<span class="fc" id="L70">	    move = rowCheck(playBoard, identity[you]);</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">	    if(move != null){</span>
+<span class="fc" id="L72">		playBoard[move[0]][move[1]] = identity[me];</span>
+<span class="fc" id="L73">		return playBoard;</span>
 	    }
 	}
-<span class="fc" id="L69">	playBoard = randomMove(playBoard);</span>
-<span class="fc" id="L70">	return playBoard;</span>
+<span class="fc" id="L76">	playBoard = randomMove(playBoard);</span>
+<span class="fc" id="L77">	return playBoard;</span>
     }
     /********************************************************************************
      * Helper functions that search for victory or loss conditions and return answers
      *********************************************************************************/
     //Calls the straight and diagonal row checks and returns the result, null if there is none.
     private int[] rowCheck(char playBoard[][], char player){
-<span class="fc" id="L77">	int[] move = straightCheck(playBoard, player);</span>
-<span class="fc bfc" id="L78" title="All 2 branches covered.">	if(move != null) return move;</span>
-<span class="fc" id="L79">	return diagCheck(playBoard, player);</span>
+<span class="fc" id="L84">	int[] move = straightCheck(playBoard, player);</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">	if(move != null) return move;</span>
+<span class="fc" id="L86">	return diagCheck(playBoard, player);</span>
     }
 
     //Checks if there are two straight in a row in any column or row and returns the intercept point
     private int[]  straightCheck(char playBoard[][], char player){
         int first, second;
-<span class="fc" id="L85">	int[] move = new int[2];</span>
-<span class="fc bfc" id="L86" title="All 2 branches covered.">        for (int i = 0; i &lt; 2; i++) {</span>
+<span class="fc" id="L92">	int[] move = new int[2];</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        for (int i = 0; i &lt; 2; i++) {</span>
             //Checking for front and back column
-<span class="fc bfc" id="L88" title="All 4 branches covered.">            if (playBoard[i][0] == player &amp;&amp; playBoard[i][2] == player){</span>
-<span class="fc" id="L89">                first = i;</span>
-<span class="fc" id="L90">                second = 1;</span>
-<span class="pc bpc" id="L91" title="1 of 2 branches missed.">                if(playBoard[first][second] == ' '){</span>
-<span class="fc" id="L92">		    move[0] = first;</span>
-<span class="fc" id="L93">		    move[1] = second;</span>
-<span class="fc" id="L94">		    return move;</span>
+<span class="fc bfc" id="L95" title="All 4 branches covered.">            if (playBoard[i][0] == player &amp;&amp; playBoard[i][2] == player){</span>
+<span class="fc" id="L96">                first = i;</span>
+<span class="fc" id="L97">                second = 1;</span>
+<span class="pc bpc" id="L98" title="1 of 2 branches missed.">                if(playBoard[first][second] == ' '){</span>
+<span class="fc" id="L99">		    move[0] = first;</span>
+<span class="fc" id="L100">		    move[1] = second;</span>
+<span class="fc" id="L101">		    return move;</span>
 		}
             }
-<span class="fc bfc" id="L97" title="All 2 branches covered.">            for (int j = 0; j &lt; 2; j++) {</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">            for (int j = 0; j &lt; 2; j++) {</span>
                 //Checking for row lines
-<span class="fc bfc" id="L99" title="All 4 branches covered.">                if (playBoard[i][j] == player &amp;&amp; playBoard[i+1][j] == player){</span>
-<span class="fc bfc" id="L100" title="All 2 branches covered.">                    first = (i == 0) ? 2 : 0;</span>
-<span class="fc" id="L101">                    second = j;</span>
-<span class="pc bpc" id="L102" title="1 of 2 branches missed.">		    if(playBoard[first][second] == ' '){</span>
-<span class="fc" id="L103">			move[0] = first;</span>
-<span class="fc" id="L104">			move[1] = second;</span>
-<span class="fc" id="L105">			return move;</span>
+<span class="fc bfc" id="L106" title="All 4 branches covered.">                if (playBoard[i][j] == player &amp;&amp; playBoard[i+1][j] == player){</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">                    first = (i == 0) ? 2 : 0;</span>
+<span class="fc" id="L108">                    second = j;</span>
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">		    if(playBoard[first][second] == ' '){</span>
+<span class="fc" id="L110">			move[0] = first;</span>
+<span class="fc" id="L111">			move[1] = second;</span>
+<span class="fc" id="L112">			return move;</span>
 		    }
                 }
                 //Checking for column lines
-<span class="fc bfc" id="L109" title="All 4 branches covered.">                if (playBoard[i][j] == player &amp;&amp; playBoard[i][j+1] == player){</span>
-<span class="fc" id="L110">                    first = i;</span>
-<span class="fc bfc" id="L111" title="All 2 branches covered.">                    second = (j == 0) ? 2 : 0;</span>
-<span class="fc bfc" id="L112" title="All 2 branches covered.">		    if(playBoard[first][second] == ' '){</span>
-<span class="fc" id="L113">			move[0] = first;</span>
-<span class="fc" id="L114">			move[1] = second;</span>
-<span class="fc" id="L115">			return move;</span>
+<span class="fc bfc" id="L116" title="All 4 branches covered.">                if (playBoard[i][j] == player &amp;&amp; playBoard[i][j+1] == player){</span>
+<span class="fc" id="L117">                    first = i;</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">                    second = (j == 0) ? 2 : 0;</span>
+<span class="fc bfc" id="L119" title="All 2 branches covered.">		    if(playBoard[first][second] == ' '){</span>
+<span class="fc" id="L120">			move[0] = first;</span>
+<span class="fc" id="L121">			move[1] = second;</span>
+<span class="fc" id="L122">			return move;</span>
 		    }
                 }
                 //checking for top and bottom
-<span class="fc bfc" id="L119" title="All 2 branches covered.">                if (i == 0)</span>
-<span class="fc bfc" id="L120" title="All 4 branches covered.">                    if (playBoard[0][j] == player &amp;&amp; playBoard[2][j] == player){</span>
-<span class="fc" id="L121">                        first = 1;</span>
-<span class="fc" id="L122">                        second = j;</span>
-<span class="fc bfc" id="L123" title="All 2 branches covered.">			if(playBoard[first][second] == ' '){</span>
-<span class="fc" id="L124">			    move[0] = first;</span>
-<span class="fc" id="L125">			    move[1] = second;</span>
-<span class="fc" id="L126">			    return move;</span>
+<span class="fc bfc" id="L126" title="All 2 branches covered.">                if (i == 0)</span>
+<span class="fc bfc" id="L127" title="All 4 branches covered.">                    if (playBoard[0][j] == player &amp;&amp; playBoard[2][j] == player){</span>
+<span class="fc" id="L128">                        first = 1;</span>
+<span class="fc" id="L129">                        second = j;</span>
+<span class="fc bfc" id="L130" title="All 2 branches covered.">			if(playBoard[first][second] == ' '){</span>
+<span class="fc" id="L131">			    move[0] = first;</span>
+<span class="fc" id="L132">			    move[1] = second;</span>
+<span class="fc" id="L133">			    return move;</span>
 			}
                     }
             }
         }
-<span class="fc" id="L131">        return null;</span>
+<span class="fc" id="L138">        return null;</span>
     }
     //checks to see if there are potential diagonal lines and returns the intersept point, null if there is none.
     private int[] diagCheck(char playboard[][], char player){
-<span class="fc" id="L135">        int[] move = new int[2];</span>
-<span class="fc bfc" id="L136" title="All 2 branches covered.">        if (playboard[1][1] == player){</span>
-<span class="pc bpc" id="L137" title="1 of 4 branches missed.">            if(playboard[0][0] == player &amp;&amp; playboard[2][2] == ' '){</span>
-<span class="fc" id="L138">                move[0] = 2;</span>
-<span class="fc" id="L139">                move[1] = 2; </span>
-<span class="fc" id="L140">                return move;</span>
+<span class="fc" id="L142">        int[] move = new int[2];</span>
+<span class="fc bfc" id="L143" title="All 2 branches covered.">        if (playboard[1][1] == player){</span>
+<span class="pc bpc" id="L144" title="1 of 4 branches missed.">            if(playboard[0][0] == player &amp;&amp; playboard[2][2] == ' '){</span>
+<span class="fc" id="L145">                move[0] = 2;</span>
+<span class="fc" id="L146">                move[1] = 2; </span>
+<span class="fc" id="L147">                return move;</span>
             }
-<span class="pc bpc" id="L142" title="1 of 4 branches missed.">            if(playboard[0][2] == player &amp;&amp; playboard[2][0] == ' '){</span>
-<span class="fc" id="L143">                move[0] = 2;</span>
-<span class="fc" id="L144">                move[1] = 0;</span>
-<span class="fc" id="L145">                return move;</span>
+<span class="pc bpc" id="L149" title="1 of 4 branches missed.">            if(playboard[0][2] == player &amp;&amp; playboard[2][0] == ' '){</span>
+<span class="fc" id="L150">                move[0] = 2;</span>
+<span class="fc" id="L151">                move[1] = 0;</span>
+<span class="fc" id="L152">                return move;</span>
             }
-<span class="fc bfc" id="L147" title="All 4 branches covered.">            if(playboard[2][0] == player &amp;&amp; playboard[0][2] == ' '){</span>
-<span class="fc" id="L148">                move[0] = 0;</span>
-<span class="fc" id="L149">                move[1] = 2;</span>
-<span class="fc" id="L150">                return move;</span>
+<span class="fc bfc" id="L154" title="All 4 branches covered.">            if(playboard[2][0] == player &amp;&amp; playboard[0][2] == ' '){</span>
+<span class="fc" id="L155">                move[0] = 0;</span>
+<span class="fc" id="L156">                move[1] = 2;</span>
+<span class="fc" id="L157">                return move;</span>
             }
-<span class="fc bfc" id="L152" title="All 4 branches covered.">            if(playboard[2][2] == player &amp;&amp; playboard[0][0] == ' '){</span>
-<span class="fc" id="L153">                move[0] = 0;</span>
-<span class="fc" id="L154">                move[1] = 0;</span>
-<span class="fc" id="L155">                return move;</span>
+<span class="fc bfc" id="L159" title="All 4 branches covered.">            if(playboard[2][2] == player &amp;&amp; playboard[0][0] == ' '){</span>
+<span class="fc" id="L160">                move[0] = 0;</span>
+<span class="fc" id="L161">                move[1] = 0;</span>
+<span class="fc" id="L162">                return move;</span>
             }
         }
-<span class="fc bfc" id="L158" title="All 8 branches covered.">        if((playboard[0][0] == player &amp;&amp; playboard[2][2] == player) || (playboard[2][0] == player &amp;&amp; playboard[0][2] == player)){</span>
-<span class="fc" id="L159">            move[0] = 1;</span>
-<span class="fc" id="L160">            move[1] = 1;</span>
-<span class="pc bpc" id="L161" title="1 of 2 branches missed.">            return ((playboard[1][1] == ' ') ? move : null);</span>
+<span class="fc bfc" id="L165" title="All 8 branches covered.">        if((playboard[0][0] == player &amp;&amp; playboard[2][2] == player) || (playboard[2][0] == player &amp;&amp; playboard[0][2] == player)){</span>
+<span class="fc" id="L166">            move[0] = 1;</span>
+<span class="fc" id="L167">            move[1] = 1;</span>
+<span class="pc bpc" id="L168" title="1 of 2 branches missed.">            return ((playboard[1][1] == ' ') ? move : null);</span>
         }
-<span class="fc" id="L163">        return null;</span>
+<span class="fc" id="L170">        return null;</span>
     }
     //Random Move generator
     private char[][] randomMove(char playBoard[][]) {
-<span class="fc" id="L167">	Random ran = new Random();</span>
+<span class="fc" id="L174">	Random ran = new Random();</span>
         while (true) {
-<span class="fc" id="L169">            int first = ran.nextInt(3);</span>
-<span class="fc" id="L170">            int second = ran.nextInt(3);</span>
-<span class="fc bfc" id="L171" title="All 2 branches covered.">            if (playBoard[first][second] == ' ') {</span>
-<span class="fc" id="L172">                playBoard[first][second] = identity[me];</span>
-<span class="fc" id="L173">                return playBoard;</span>
+<span class="fc" id="L176">            int first = ran.nextInt(3);</span>
+<span class="fc" id="L177">            int second = ran.nextInt(3);</span>
+<span class="fc bfc" id="L178" title="All 2 branches covered.">            if (playBoard[first][second] == ' ') {</span>
+<span class="fc" id="L179">                playBoard[first][second] = identity[me];</span>
+<span class="fc" id="L180">                return playBoard;</span>
             }
-<span class="fc" id="L175">        }</span>
+<span class="fc" id="L182">        }</span>
     }
 
     private boolean hasMoves(char [][] inputGrid) {
-<span class="pc bpc" id="L179" title="1 of 2 branches missed.">        for (int i = 0; i &lt; 3; i++){</span>
-<span class="fc bfc" id="L180" title="All 2 branches covered.">            for (int j = 0 ; j &lt; 3 ; j++){</span>
-<span class="fc bfc" id="L181" title="All 2 branches covered.">                if (inputGrid[i][j] == ' ') return true;</span>
+<span class="pc bpc" id="L186" title="1 of 2 branches missed.">        for (int i = 0; i &lt; 3; i++){</span>
+<span class="fc bfc" id="L187" title="All 2 branches covered.">            for (int j = 0 ; j &lt; 3 ; j++){</span>
+<span class="fc bfc" id="L188" title="All 2 branches covered.">                if (inputGrid[i][j] == ' ') return true;</span>
             }
         }
-<span class="nc" id="L184">        return false;</span>
+<span class="nc" id="L191">        return false;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
