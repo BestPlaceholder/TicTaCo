@@ -22,18 +22,25 @@ public class TicTacAI {
     private int turn = 0;
     //Diff true/false switches difficulty on and off.
     private boolean diff;
-    //The Constructor takes in which player the AI is and what its difficulty should be.
+    /**
+     * Constructs TicTacAI with its character representation and AI difficulty
+     *
+     * @param me The character that represents the AI in the game.
+     * @param diff The difficulty setting of the AI
+     */
     public TicTacAI(char me, boolean diff){
         this.me = (identity[0] == me ? 0 : 1);
         you = (identity[0] == me ? 1 : 0);
         this.diff = diff;
     }
 
-    /*
+    /**
      *  getMove takes in a playboard and plays a move on them based on difficulty and board state.
      *  If the difficulty is on it has set starting moves as well as going for the win
-     *  and blocking opponent wins when it can.
-     *  if its not it just plays completely random moves
+     *  and blocking opponent wins when it can.  If its not it just plays completely random moves
+     *
+     *  @param playBoard A 3x3 two dimensional char array that contains the current state of the game
+     *  @return playBoard A 3x3 two dimensional char array with the added AI move
      */
     public char[][] getMove(char playBoard[][]){
         if (!hasMoves(playBoard)) return null;

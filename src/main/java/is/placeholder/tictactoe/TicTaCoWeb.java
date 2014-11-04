@@ -17,6 +17,9 @@ public class TicTaCoWeb implements SparkApplication {
 
     private TicTacToe ticTacToe;
 
+    /**
+    *   A method that does EVERYTHING
+    */
     public void init(){
         
         post(new Route("/playtic"){
@@ -29,6 +32,12 @@ public class TicTaCoWeb implements SparkApplication {
 
                 // Account for diffrence between tiles and arrays
                 tileX--;tileY--;
+
+                // Check for win
+                if (ticTacToe.hasGameBeenWon()) {
+                    ticTacToe.makeGrid();
+                    return "clear";
+                }
 
                 // Make the player move, if invalid, return
                 String playerMove;
@@ -45,20 +54,23 @@ public class TicTaCoWeb implements SparkApplication {
                         Integer.toString(++computerMoveCoordinates[1]) + " o";
                 else
                     computerMove = playerMove; // Say the same move if computer does nothing
-
+                
                 // Check for win
-                String scores = null;
+                String scores = "";
                 int gameEnd = ticTacToe.hasWon();
+
                 // If there is a win, send the update score to the web
                 if (gameEnd != 0) {
-                    if (gameEnd == 1)
+                    ticTacToe.calculateScores(gameEnd);
+                    if (gameEnd == 2)
                         scores = " " + Integer.toString(ticTacToe.getPlayerScore());
-                    else if (gameEnd == 2)
-                        scores = " 0 " + Integer.toString(ticTacToe.getComputerScore());
                     else if (gameEnd == 3)
+                        scores = " 0 " + Integer.toString(ticTacToe.getComputerScore());
+                    else if (gameEnd == 1)
                         scores = " 0 0 " + Integer.toString(ticTacToe.getTieScore());
                 }
 
+                //return playerMove + " " + computerMove + scores;
                 return playerMove + " " + computerMove + scores;
             }
         });
@@ -69,15 +81,15 @@ public class TicTaCoWeb implements SparkApplication {
                 String difficulty = request.queryParams("option");
 
                 // Create a new game with the desired difficulty
-                if (difficulty == "easy")
+                if (difficulty.equals("easy"))
                     ticTacToe = new TicTacToe(true, false);
                 else
-                    ticTacToe = new TicTacToe(true, false);
+                    ticTacToe = new TicTacToe(true, true);
 
                 // Create the grid
                 ticTacToe.makeGrid();
 
-                return " ";
+                return difficulty;
             }
         });
     }
